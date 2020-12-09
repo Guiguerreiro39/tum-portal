@@ -1,0 +1,8 @@
+{
+  "name": "tum-portal",
+  "template": "PWA",
+  "isConfigured": {
+    "client": false,
+    "server": false
+  }
+}
