@@ -17,6 +17,7 @@ const userSchema = new Schema(
             type: String,
             required: [true, "email field is required"],
         },
+        //add
     },
     { timestamps: true }
 );
