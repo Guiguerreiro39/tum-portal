@@ -16,4 +16,4 @@ const eventSchema = new Schema(
     { timestamps: true }
 );
 
-module.exports = model("users", userSchema);
+module.exports = model("events", eventSchema);
