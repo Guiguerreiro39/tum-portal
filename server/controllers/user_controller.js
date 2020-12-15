@@ -4,6 +4,7 @@ const { userExists } = require("../functions/user_functions");
 
 const User = require("../models/user_schema");
 const bcrypt = require("bcrypt");
+const { use } = require("passport");
 
 const createUser = async (req, res) => {
     const username = req.body.username;
@@ -81,14 +82,22 @@ const deleteUser = (req, res) => {
 const login = (req, res, next) => {
     passport.authenticate("local", (err, user, _) => {
         if (err) throw err;
-        if (!user) res.send("No User Exists!");
+        if (!user) res.send("User doesn't exist!");
         else {
             req.logIn(user, (err) => {
                 if (err) throw err;
-                res.send("Successfully Authenticated");
+                res.send({
+                    username: user.username,
+                    fullName: user.fullName,
+                });
             });
         }
     })(req, res, next);
+};
+
+const logout = (req, res) => {
+    req.logout();
+    res.send("Logout completed!");
 };
 
 module.exports = {
@@ -97,4 +106,5 @@ module.exports = {
     updateUser,
     deleteUser,
     login,
+    logout,
 };

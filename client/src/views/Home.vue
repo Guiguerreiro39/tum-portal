@@ -1,18 +1,19 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/mevn.jpg" />
-    <HelloWorld msg="PWA Boilerplate Template" />
-  </div>
+    <div class="home">
+        <h1>This is the home page</h1>
+        <p v-if="username.length > 0">Hello {{ username }}</p>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import "es6-promise/auto";
 export default {
-  name: "home",
-  components: {
-    HelloWorld
-  }
+    name: "home",
+    computed: {
+        username: function() {
+            const user = this.$store.getters.getUser;
+            return user.username;
+        },
+    },
 };
 </script>
