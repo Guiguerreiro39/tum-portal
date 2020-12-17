@@ -4,7 +4,6 @@ const { userExists } = require("../functions/user_functions");
 
 const User = require("../models/user_schema");
 const bcrypt = require("bcrypt");
-const { use } = require("passport");
 
 const createUser = async (req, res) => {
     const username = req.body.username;

@@ -4,6 +4,9 @@ import router from "./router";
 import { store } from "./store.js";
 import "./registerServiceWorker";
 
+import "./styles/tailwind.css";
+import "./styles/global.css";
+
 import axios from "axios";
 
 Vue.prototype.$http = axios;

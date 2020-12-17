@@ -1,7 +1,7 @@
 <template>
     <div class="home">
-        <h1>This is the home page</h1>
-        <p v-if="username.length > 0">Hello {{ username }}</p>
+        <h1 class="title">O Portal dos Vermelhinhos!</h1>
+        <h2>O cantinho da Tuna Universitária do Minho</h2>
     </div>
 </template>
 
@@ -9,11 +9,14 @@
 import "es6-promise/auto";
 export default {
     name: "home",
-    computed: {
-        username: function() {
-            const user = this.$store.getters.getUser;
-            return user.username;
-        },
-    },
 };
 </script>
+
+<style lang="postcss" scoped>
+.home {
+    @apply flex flex-col items-center pt-10 bg-center bg-cover bg-fixed bg-landing h-full w-full text-white;
+}
+.title {
+    @apply text-4xl;
+}
+</style>

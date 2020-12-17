@@ -18,6 +18,7 @@
     "vuex": "^3.6.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.2",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-plugin-pwa": "^3.8.0",
@@ -25,12 +26,18 @@
     "@vue/cli-service": "^3.8.0",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/test-utils": "1.0.0-beta.29",
+    "autoprefixer": "^9.8.6",
     "babel-eslint": "^10.0.1",
     "chai": "^4.1.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "lint-staged": "^8.1.5",
-    "vue-template-compiler": "^2.6.10"
+    "postcss": "^7.0.35",
+    "postcss-loader": "^4.1.0",
+    "postcss-preset-env": "^6.7.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.44.2"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
