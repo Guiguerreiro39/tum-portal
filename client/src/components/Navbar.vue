@@ -5,13 +5,8 @@
             <router-link to="/about" class="nav-link">About</router-link>
         </div>
         <div class="nav-right">
-            <router-link to="/login" v-if="!isLoggedIn" class="nav-link"
-                >Login</router-link
-            >
-            <p v-if="isLoggedIn">Hello {{ username }}</p>
-            <router-link to="/logout" v-if="isLoggedIn" class="nav-link"
-                >Logout</router-link
-            >
+            <p>Hello {{ username }}</p>
+            <span @click="logout" class="nav-link">Logout</span>
         </div>
     </div>
 </template>
@@ -20,13 +15,28 @@
 import "es6-promise/auto";
 export default {
     computed: {
-        isLoggedIn: function() {
-            const user = this.$store.getters.getUser;
-            return user.username.length > 0;
-        },
         username: function() {
             const user = this.$store.getters.getUser;
             return user.username;
+        },
+    },
+    methods: {
+        logout() {
+            this.$http({
+                method: "get",
+                url: `${process.env.VUE_APP_API}/logout`,
+                withCredentials: true,
+            })
+                .then((res) => {
+                    this.$store.commit("setUser", {
+                        username: "",
+                        fullName: "",
+                    });
+                    router.push({ name: "home" });
+                })
+                .catch((err) => {
+                    router.push({ name: "home" });
+                });
         },
     },
 };
@@ -34,10 +44,10 @@ export default {
 
 <style scoped lang="postcss">
 .nav {
-    @apply fixed top-0 w-full h-14 flex justify-between items-center px-5 text-black font-medium bg-gray-200 text-lg;
+    @apply fixed top-0 w-full h-14 flex justify-between items-center px-5 text-white font-medium text-lg border-b rounded-b-lg;
 }
 .nav-link {
-    @apply mx-2;
+    @apply mx-2 cursor-pointer;
 }
 .nav-right {
     @apply flex;

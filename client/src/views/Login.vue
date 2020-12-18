@@ -1,19 +1,29 @@
 <template>
     <div class="login">
-        <form @submit.prevent="login">
+        <form
+            @submit.prevent="login"
+            class="flex flex-col items-center justify-center bg-white w-1/3 h-1/4 rounded-lg bg-opacity-50"
+        >
             <input
                 type="text"
                 placeholder="Username"
                 autocomplete="username"
                 v-model="username"
+                class="input"
             />
             <input
                 type="password"
                 placeholder="Password"
                 autocomplete="current-password"
                 v-model="password"
+                class="input"
             />
-            <button type="submit">Login</button>
+            <button
+                type="submit"
+                class="bg-red-500 rounded-lg text-white py-1 px-3 text-xl font-medium mt-2 hover:bg-red-600"
+            >
+                Login
+            </button>
         </form>
     </div>
 </template>
@@ -49,4 +59,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="postcss">
+.login {
+    @apply w-full h-full flex flex-col items-center justify-center;
+}
+.input {
+    @apply w-4/5 my-2 py-2 px-2 rounded-lg outline-none;
+}
+.input:focus {
+    @apply shadow-outline;
+}
+</style>

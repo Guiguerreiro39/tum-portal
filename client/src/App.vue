@@ -1,7 +1,9 @@
 <template>
-    <div id="app">
-        <Navbar />
-        <router-view />
+    <div id="app" :class="{ landing: !isLoggedIn }">
+        <div :class="{ overlay: !isLoggedIn }">
+            <Navbar v-if="isLoggedIn" />
+            <router-view />
+        </div>
     </div>
 </template>
 
@@ -13,6 +15,12 @@ import "es6-promise/auto";
 export default {
     components: {
         Navbar,
+    },
+    computed: {
+        isLoggedIn: function() {
+            const user = this.$store.getters.getUser;
+            return user.username.length > 0;
+        },
     },
     created() {
         this.$http({
@@ -33,6 +41,12 @@ export default {
 
 <style scoped lang="postcss">
 #app {
-    @apply pt-14 h-full w-full;
+    @apply h-full w-full;
+}
+.landing {
+    @apply bg-center bg-cover bg-fixed bg-landing h-full w-full;
+}
+.overlay {
+    @apply bg-gray-600 bg-opacity-60 h-full w-full;
 }
 </style>
