@@ -39,21 +39,18 @@ export default {
         };
     },
     methods: {
-        login() {
-            this.$http({
-                method: "post",
-                url: `${process.env.VUE_APP_API}/login`,
-                data: {
+        login: function() {
+            this.$store
+                .dispatch("login", {
                     username: this.username,
                     password: this.password,
-                },
-                withCredentials: true,
-            })
-                .then((res) => {
-                    this.$store.commit("setUser", res.data);
-                    router.push({ name: "home" });
                 })
-                .catch((err) => console.log(err));
+                .then((res) => {
+                    this.$router.push("/");
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         },
     },
 };

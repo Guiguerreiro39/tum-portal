@@ -37,7 +37,7 @@ const createUser = async (req, res) => {
 };
 
 const getUser = (req, res) => {
-    res.send(req.user);
+    res.send({ user: req.user });
 };
 
 const updateUser = (req, res) => {
@@ -86,8 +86,10 @@ const login = (req, res, next) => {
             req.logIn(user, (err) => {
                 if (err) throw err;
                 res.send({
-                    username: user.username,
-                    fullName: user.fullName,
+                    user: {
+                        username: user.username,
+                        fullName: user.fullName,
+                    },
                 });
             });
         }

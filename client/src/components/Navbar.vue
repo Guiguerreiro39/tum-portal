@@ -16,26 +16,18 @@ import "es6-promise/auto";
 export default {
     computed: {
         username: function() {
-            const user = this.$store.getters.getUser;
-            return user.username;
+            return this.$store.getters.getUsername;
         },
     },
     methods: {
         logout() {
-            this.$http({
-                method: "get",
-                url: `${process.env.VUE_APP_API}/logout`,
-                withCredentials: true,
-            })
-                .then((res) => {
-                    this.$store.commit("setUser", {
-                        username: "",
-                        fullName: "",
-                    });
-                    router.push({ name: "home" });
+            this.$store
+                .dispatch("logout")
+                .then(() => {
+                    this.$router.push("/");
                 })
                 .catch((err) => {
-                    router.push({ name: "home" });
+                    console.log(err);
                 });
         },
     },

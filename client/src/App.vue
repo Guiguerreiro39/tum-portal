@@ -8,33 +8,17 @@
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue";
-
-import { store } from "@/store.js";
 import "es6-promise/auto";
+
+import Navbar from "./components/Navbar.vue";
 export default {
     components: {
         Navbar,
     },
     computed: {
         isLoggedIn: function() {
-            const user = this.$store.getters.getUser;
-            return user.username.length > 0;
+            return this.$store.getters.isAuthenticated;
         },
-    },
-    created() {
-        this.$http({
-            method: "get",
-            url: `${process.env.VUE_APP_API}/user`,
-            withCredentials: true,
-        }).then((res) => {
-            if (typeof res.data.username !== "undefined") {
-                this.$store.commit("setUser", {
-                    username: res.data.username,
-                    fullName: res.data.fullName,
-                });
-            }
-        });
     },
 };
 </script>

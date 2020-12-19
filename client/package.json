@@ -20,7 +20,8 @@
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
-    "vuex": "^3.6.0"
+    "vuex": "^3.6.0",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.2",
