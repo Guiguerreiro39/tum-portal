@@ -9,12 +9,12 @@ const {
     logout,
 } = require("../controllers/user_controller");
 
-const {
+/*const {
     createEvent,
     getEvent,
     updateEvent,
     deleteEvent,
-} = require("../controllers/event_controller");
+} = require("../controllers/event_controller");*/
 
 const router = express.Router();
 
@@ -25,12 +25,12 @@ router
     .delete("/user/:id", deleteUser)
     .post("/login/", login)
     .get("/logout/", logout);
-
+/*
 router
     .post("/event/",createEvent)
     .get("/event/",getEvent)
     .put("/event/:id", updateEvent)
     .delete("/event/:id", deleteEvent)
 
-
+*/
 module.exports = router;
