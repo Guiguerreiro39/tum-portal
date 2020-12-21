@@ -17,6 +17,13 @@ const userSchema = new Schema(
             type: String,
             required: [true, "email field is required"],
         },
+        voice: {
+            type: String,
+        },
+        instrument: {
+            type: String,
+        }
+
     },
     { timestamps: true }
 );
