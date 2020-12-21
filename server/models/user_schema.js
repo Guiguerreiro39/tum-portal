@@ -20,7 +20,7 @@ const userSchema = new Schema(
         voice: {
             type: String,
         },
-        isntrument: {
+        instrument: {
             type: String,
         }
 
