@@ -13,7 +13,7 @@
         >Entrar</router-link
         >
         <router-link
-            to="/"
+            to="/register"
             class="btn fill hover:bg-red-600 hover:border-red-600"
         >Registar</router-link
         >
