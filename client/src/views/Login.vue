@@ -10,6 +10,7 @@
                 autocomplete="username"
                 v-model="username"
                 class="input"
+                autofocus
             />
             <input
                 type="password"

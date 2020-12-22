@@ -36,7 +36,7 @@ export default {
 
 <style scoped lang="postcss">
 .nav {
-    @apply fixed top-0 w-full h-14 flex justify-between items-center px-5 text-white font-medium text-lg border-b rounded-b-lg;
+    @apply fixed top-0 w-full h-14 flex justify-between items-center px-5 text-black font-medium text-lg border-b rounded-b-lg;
 }
 .nav-link {
     @apply mx-2 cursor-pointer;

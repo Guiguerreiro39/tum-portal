@@ -1,19 +1,17 @@
 <template>
-    <div id="app" :class="{ landing: !isLoggedIn }">
-        <div :class="{ overlay: !isLoggedIn }">
-            <Navbar v-if="isLoggedIn" />
-            <router-view />
-        </div>
-    </div>
+    <main id="app">
+        <Home v-if="isLoggedIn" />
+        <Landing v-else />
+    </main>
 </template>
 
 <script>
-import "es6-promise/auto";
-
-import Navbar from "./components/Navbar.vue";
+import Home from "./containers/Home.vue";
+import Landing from "./containers/Landing.vue";
 export default {
     components: {
-        Navbar,
+        Landing,
+        Home,
     },
     computed: {
         isLoggedIn: function() {
@@ -26,11 +24,5 @@ export default {
 <style scoped lang="postcss">
 #app {
     @apply h-full w-full;
-}
-.landing {
-    @apply bg-center bg-cover bg-fixed bg-landing h-full w-full;
-}
-.overlay {
-    @apply bg-gray-600 bg-opacity-60 h-full w-full;
 }
 </style>

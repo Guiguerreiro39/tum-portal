@@ -18,12 +18,12 @@ Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
 
-sync(store, router);
+store.dispatch("init").then(() => {
+    sync(store, router);
 
-store.dispatch("init");
-
-new Vue({
-    router,
-    render: (h) => h(App),
-    store,
-}).$mount("#app");
+    new Vue({
+        router,
+        render: (h) => h(App),
+        store,
+    }).$mount("#app");
+});
