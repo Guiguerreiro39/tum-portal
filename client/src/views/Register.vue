@@ -2,9 +2,9 @@
   <div>
     <h4>Registar</h4>
     <form @submit.prevent="register">
-      <label for="name">Username</label>
+      <label for="username">Username</label>
       <div>
-        <input id="name" type="text" v-model="name" required autofocus>
+        <input id="username" type="text" v-model="username" required autofocus>
       </div>
       <label for="email" >E-Mail</label>
       <div>
@@ -28,7 +28,7 @@
 export default {
   data() {
     return {
-      name: "",
+      username: "",
       email: "",
       password: "",
       password_confirmation: "",
@@ -37,7 +37,7 @@ export default {
   methods: {
     register: function() {
       let data = {
-        name: this.name,
+        username: this.username,
         email: this.email,
         password: this.password,
       };
