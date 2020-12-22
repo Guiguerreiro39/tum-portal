@@ -20,48 +20,43 @@
             </div>
         </div>
         <div class="social">
-            <button @click="btnClick('facebook')" class="focus:outline-none">
-                <font-awesome-icon :icon="['fab', 'facebook']" class="icon" />
-            </button>
-            <button @click="btnClick('instagram')" class="focus:outline-none">
-                <font-awesome-icon :icon="['fab', 'instagram']" class="icon" />
-            </button>
-            <button @click="btnClick('spotify')" class="focus:outline-none">
-                <font-awesome-icon :icon="['fab', 'spotify']" class="icon" />
-            </button>
-            <button @click="btnClick('youtube')" class="focus:outline-none">
-                <font-awesome-icon :icon="['fab', 'youtube']" class="icon" />
-            </button>
+            <font-awesome-icon
+                :icon="['fab', 'facebook']"
+                class="icon"
+                @click="socialClick(social.facebook)"
+            />
+            <font-awesome-icon
+                :icon="['fab', 'instagram']"
+                class="icon"
+                @click="socialClick(social.instragram)"
+            />
+            <font-awesome-icon
+                :icon="['fab', 'spotify']"
+                class="icon"
+                @click="socialClick(social.spotify)"
+            />
+            <font-awesome-icon
+                :icon="['fab', 'youtube']"
+                class="icon"
+                @click="socialClick(social.youtube)"
+            />
         </div>
     </div>
 </template>
 
 <script>
-import "es6-promise/auto";
+import { social } from "../constants/social.js";
 
 export default {
     name: "home",
+    data() {
+        return {
+            social: social,
+        };
+    },
     methods: {
-        btnClick: function(site) {
-            switch (site) {
-                case "facebook":
-                    window.open(
-                        "https://www.facebook.com/tunauniversitariaminho"
-                    );
-                    break;
-                case "instagram":
-                    window.open(
-                        "https://www.instagram.com/tunauniversitariadominho/"
-                    );
-                    break;
-                case "spotify":
-                    window.open(
-                        "https://open.spotify.com/artist/7nEqs0isAyEONxQbPrVRgb?si=kkKOA8T5SKy_R-lPx3NpIg"
-                    );
-                    break;
-                case "youtube":
-                    window.open("https://www.youtube.com/user/tunaminho");
-            }
+        socialClick(site) {
+            window.open(site);
         },
     },
 };

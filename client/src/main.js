@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import "./styles/tailwind.css";
 import "./styles/global.css";
-import "./icons";
+import "./constants/icons";
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
