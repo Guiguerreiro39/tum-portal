@@ -5,7 +5,6 @@ import store from "./store";
 import Home from "./views/Home.vue";
 import About from "./views/About.vue";
 import Login from "./views/Login.vue";
-import Logout from "./views/Logout.vue";
 import Register from "./views/Register.vue";
 
 Vue.use(Router);
@@ -36,11 +35,6 @@ const router = new Router({
             path: "/register",
             name: "register",
             component: Register,
-        },
-        {
-            path: "/logout",
-            name: "logout",
-            component: Logout,
         },
     ],
 });
