@@ -1,6 +1,7 @@
 "use strict";
 
 const { userExists } = require("../functions/user_functions");
+const userInfo = require("../constants/userInfo");
 
 const User = require("../models/user_schema");
 const bcrypt = require("bcrypt");
@@ -21,8 +22,10 @@ const createUser = async (req, res) => {
             fullName: fullName,
         })
             .then((data) => {
-                console.log("New User Created!", data);
-                res.status(201).json(data);
+                console.log("New User Created!");
+                res.status(201).json({
+                    user: userInfo(data),
+                });
             })
             .catch((err) => {
                 if (err.name === "ValidationError") {
@@ -41,13 +44,25 @@ const getUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
-    User.findByIdAndUpdate(req.params.id, req.body, {
+    let user;
+    if (req.file) {
+        user = {
+            ...req.body,
+            profileImage: req.file.path,
+        };
+    } else {
+        user = req.body;
+    }
+
+    User.findByIdAndUpdate(req.params.id, user, {
         useFindAndModify: false,
         new: true,
     })
         .then((data) => {
             console.log("User updated!");
-            res.status(201).json(data);
+            res.status(201).json({
+                user: userInfo(data),
+            });
         })
         .catch((err) => {
             if (err.name === "ValidationError") {
@@ -81,15 +96,16 @@ const deleteUser = (req, res) => {
 const login = (req, res, next) => {
     passport.authenticate("local", (err, user, _) => {
         if (err) throw err;
-        if (!user) res.send("User doesn't exist!");
+        if (!user)
+            res.send({
+                success: false,
+            });
         else {
             req.logIn(user, (err) => {
                 if (err) throw err;
                 res.send({
-                    user: {
-                        username: user.username,
-                        fullName: user.fullName,
-                    },
+                    success: true,
+                    user: userInfo(user),
                 });
             });
         }

@@ -5,8 +5,10 @@ import store from "./store";
 import Home from "./views/Home.vue";
 import Landing from "./views/Landing.vue";
 import About from "./views/About.vue";
+import Profile from "./views/Profile.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
+import Edit from "./views/Edit.vue";
 
 Vue.use(Router);
 
@@ -33,6 +35,23 @@ const router = new Router({
                 requiresAuth: true,
             },
         },
+        {
+            path: "/profile",
+            name: "profile",
+            component: Profile,
+            meta: {
+                requiresAuth: true,
+            },
+        },
+        {
+            path: "/profile/edit",
+            name: "edit",
+            component: Edit,
+            meta: {
+                requiresAuth: true,
+            },
+        },
+
         {
             path: "/login",
             name: "login",

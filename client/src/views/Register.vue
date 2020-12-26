@@ -7,10 +7,14 @@
                 <input
                     id="name"
                     type="text"
-                    v-model="name"
+                    v-model="username"
                     required
                     autofocus
                 />
+            </div>
+            <label for="name">Full Name</label>
+            <div>
+                <input type="text" v-model="fullName" required />
             </div>
             <label for="email">E-Mail</label>
             <div>
@@ -44,18 +48,20 @@
 export default {
     data() {
         return {
-            name: "",
+            username: "",
             email: "",
             password: "",
             password_confirmation: "",
+            fullName: "",
         };
     },
     methods: {
         register: function() {
             let data = {
-                name: this.name,
+                username: this.username,
                 email: this.email,
                 password: this.password,
+                fullName: this.fullName,
             };
             this.$store
                 .dispatch("register", data)

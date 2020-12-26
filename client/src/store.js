@@ -23,9 +23,23 @@ const store = new Vuex.Store({
         logout(state) {
             state.status = "";
         },
+        update_user(state, user) {
+            state.user = {
+                ...state.user,
+                ...user,
+            };
+        },
     },
     getters: {
         getUsername: (state) => state.user.username,
+        getFullName: (state) => state.user.fullName,
+        getInstrument: (state) => state.user.instrument,
+        getVoice: (state) => state.user.voice,
+        getContact: (state) => state.user.contact,
+        getEmail: (state) => state.user.email,
+        getResidence: (state) => state.user.residence,
+        getID: (state) => state.user.id,
+        getProfileImage: (state) => state.user.profileImage,
         isAuthenticated: (state) => state.status === "success",
         authStatus: (state) => state.status,
     },
@@ -40,8 +54,12 @@ const store = new Vuex.Store({
                     data: user,
                 })
                     .then((res) => {
-                        const user = res.data.user;
-                        commit("auth_success", user);
+                        if (res.data.success) {
+                            const user = res.data.user;
+                            commit("auth_success", user);
+                        } else {
+                            throw new Error("User does not exist!");
+                        }
                         resolve(res);
                     })
                     .catch((err) => {
@@ -61,7 +79,7 @@ const store = new Vuex.Store({
                 })
                     .then((res) => {
                         const user = res.data.user;
-                        commit("auth_success");
+                        commit("auth_success", user);
                         resolve(res);
                     })
                     .catch((err) => {
@@ -105,6 +123,45 @@ const store = new Vuex.Store({
                     })
                     .catch((err) => {
                         commit("auth_error");
+                        reject(err);
+                    });
+            });
+        },
+        fileUpload({ commit }, file) {
+            return new Promise((resolve, reject) => {
+                let formData = new FormData();
+                formData.append("profileImage", file);
+
+                axios({
+                    method: "put",
+                    url: `${process.env.VUE_APP_API}/user/${this.getters.getID}`,
+                    data: formData,
+                    withCredentials: true,
+                })
+                    .then((res) => {
+                        commit("update_user", {
+                            profileImage: res.data.user.profileImage,
+                        });
+                        resolve(res.data.user.profileImage);
+                    })
+                    .catch((err) => {
+                        reject(err);
+                    });
+            });
+        },
+        updateUser({ commit }, payload) {
+            return new Promise((resolve, reject) => {
+                axios({
+                    method: "put",
+                    url: `${process.env.VUE_APP_API}/user/${this.getters.getID}`,
+                    data: payload,
+                    withCredentials: true,
+                })
+                    .then((res) => {
+                        commit("update_user", res.data.user);
+                        resolve(res.data.user);
+                    })
+                    .catch((err) => {
                         reject(err);
                     });
             });

@@ -16,6 +16,8 @@ const port = process.env.PORT || 9000;
 
 const app = express();
 
+app.use("/api/uploads", express.static("uploads"));
+
 // Configure middlewares
 app.use(
     cors({

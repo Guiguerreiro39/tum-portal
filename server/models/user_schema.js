@@ -19,11 +19,42 @@ const userSchema = new Schema(
         },
         voice: {
             type: String,
+            enum: ["alto", "médios-alto", "médio-baixo", "baixo", null],
+            default: null,
+        },
+        contact: {
+            type: String,
+            default: null,
+        },
+        residence: {
+            type: String,
+            default: null,
         },
         instrument: {
             type: String,
-        }
-
+            enum: [
+                "guitarra",
+                "cavaquinho",
+                "bandolim",
+                "braguesa",
+                "estandarte",
+                "pandeireta",
+                "percursão",
+                "trompete",
+                "clarinete",
+                "violino",
+                "flauta",
+                "saxofone",
+                "contrabaixo",
+                "acordeão",
+                null,
+            ],
+            default: null,
+        },
+        profileImage: {
+            type: String,
+            default: "uploads/default.jpg",
+        },
     },
     { timestamps: true }
 );

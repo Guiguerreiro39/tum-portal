@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <Navbar />
-        <div class="container mx-auto pt-14 px-10">
+        <div class="container mx-auto pt-14 h-full">
             <router-view />
         </div>
     </div>
@@ -17,4 +17,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="postcss">
+.home {
+    @apply h-full w-full bg-gray-200;
+}
+</style>

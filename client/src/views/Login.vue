@@ -50,6 +50,8 @@ export default {
                     this.$router.push("/");
                 })
                 .catch((err) => {
+                    this.username = "";
+                    this.password = "";
                     console.log(err);
                 });
         },

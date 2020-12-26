@@ -1,4 +1,6 @@
 const express = require("express");
+const upload = require("../middleware/upload_middleware");
+const auth = require("../middleware/auth_middleware");
 
 const {
     createUser,
@@ -21,10 +23,10 @@ const router = express.Router();
 router
     .post("/user/", createUser)
     .get("/user/", getUser)
-    .put("/user/:id", updateUser)
-    .delete("/user/:id", deleteUser)
+    .put("/user/:id", auth.isAuthenticated, auth.isPrivate, upload, updateUser)
+    .delete("/user/:id", auth.isAuthenticated, auth.isPrivate, deleteUser)
     .post("/login/", login)
-    .get("/logout/", logout);
+    .get("/logout/", auth.isAuthenticated, logout);
 /*
 router
     .post("/event/",createEvent)
