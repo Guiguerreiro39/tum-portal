@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <h4>Registar</h4>
-        <form @submit.prevent="register">
-            <label for="name">Username</label>
+  <div class="register">
+        <form @submit.prevent="register"
+              class="flex flex-col items-center justify-center bg-white w-1/3 h-1/3 rounded-lg bg-opacity-50">
+            <label for="name">Nome Tuna</label>
             <div>
                 <input
                     id="name"
@@ -12,7 +12,7 @@
                     autofocus
                 />
             </div>
-            <label for="name">Full Name</label>
+            <label for="name">Primeiro e Último nome</label>
             <div>
                 <input type="text" v-model="fullName" required />
             </div>
@@ -39,7 +39,9 @@
                 />
             </div>
             <div>
-                <button type="submit">Registar</button>
+                <button type="submit"
+                        class="bg-red-500 rounded-lg text-white py-1 px-3 text-xl font-medium mt-2 hover:bg-red-600">
+                  Registar</button>
             </div>
         </form>
     </div>
