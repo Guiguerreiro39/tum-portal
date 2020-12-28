@@ -2,24 +2,24 @@
 
 const { eventExists } = require("../functions/event_functions");
 
-const User = require("../models/event_schema");
+const Event = require("../models/event_schema");
 
 const createEvent = async (req, res) => {
-    const username = req.body.username;
-    const fullName = req.body.fullName;
-    const email = req.body.email;
+    const eventName = req.body.eventName;
+    const eventLocation = req.body.eventLocation;
+    const eventDescription = req.body.eventDescription;
 
-    if (await userExists(username)) {
-        res.send("User already exists!");
+
+    if (await eventExists(eventName)) {
+        res.send("Event already exists!");
     } else {
-        User.create({
-            username: username,
-            password: password,
-            email: email,
-            fullName: fullName,
+        Event.create({
+            eventName: eventName,
+            eventLocation: eventLocation,
+            eventDescription: eventDescription
         })
             .then((data) => {
-                console.log("New User Created!", data);
+                console.log("New Event Created!", data);
                 res.status(201).json(data);
             })
             .catch((err) => {
@@ -34,17 +34,17 @@ const createEvent = async (req, res) => {
     }
 };
 
-const getUser = (req, res) => {
-    res.send(req.user);
+const getEvent= (req, res) => {
+    res.send(req.event);
 };
 
-const updateUser = (req, res) => {
-    User.findByIdAndUpdate(req.params.id, req.body, {
+const updateEvent = (req, res) => {
+    Event.findByIdAndUpdate(req.params.id, req.body, {
         useFindAndModify: false,
         new: true,
     })
         .then((data) => {
-            console.log("User updated!");
+            console.log("Event updated!");
             res.status(201).json(data);
         })
         .catch((err) => {
@@ -58,20 +58,27 @@ const updateUser = (req, res) => {
         });
 };
 
-const deleteUser = (req, res) => {
-    User.findById(req.params.id)
+const deleteEvent = (req, res) => {
+    Event.findById(req.params.id)
         .then((data) => {
             if (!data) {
-                throw new Error("User not available");
+                throw new Error("Event not available");
             }
             return data.remove();
         })
         .then((data) => {
-            console.log("User removed!");
+            console.log("Event removed!");
             res.status(200).json(data);
         })
         .catch((err) => {
             console.error(err);
             res.status(500).json(err);
         });
+};
+
+module.exports = {
+    createEvent,
+    getEvent,
+    updateEvent,
+    deleteEvent,
 };
