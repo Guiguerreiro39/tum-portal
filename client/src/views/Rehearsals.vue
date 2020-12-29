@@ -9,7 +9,10 @@
                 @addPresence="addPresence"
                 @removePresence="removePresence"
             />
-            <div class="grid grid-cols-2 divide-solid divide-x h-5/6">
+            <div
+                class="grid grid-cols-2 divide-solid divide-x h-5/6"
+                v-if="allUsers.length > 0"
+            >
                 <Table
                     :users="leftUsers"
                     :selectedUsers="leftSelected"
