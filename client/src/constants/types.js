@@ -7,7 +7,7 @@ export const instrumentType = [
     "braguesa",
     "estandarte",
     "pandeireta",
-    "percursão",
+    "percussão",
     "trompete",
     "clarinete",
     "violino",

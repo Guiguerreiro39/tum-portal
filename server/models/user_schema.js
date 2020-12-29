@@ -39,7 +39,7 @@ const userSchema = new Schema(
                 "braguesa",
                 "estandarte",
                 "pandeireta",
-                "percursão",
+                "percussão",
                 "trompete",
                 "clarinete",
                 "violino",
