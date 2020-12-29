@@ -9,6 +9,7 @@ import Profile from "./views/Profile.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Edit from "./views/Edit.vue";
+import Rehearsals from "./views/Rehearsals.vue";
 
 Vue.use(Router);
 
@@ -31,6 +32,14 @@ const router = new Router({
             path: "/about",
             name: "about",
             component: About,
+            meta: {
+                requiresAuth: true,
+            },
+        },
+        {
+            path: "/rehearsals",
+            name: "rehearsals",
+            component: Rehearsals,
             meta: {
                 requiresAuth: true,
             },

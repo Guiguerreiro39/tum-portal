@@ -21,7 +21,7 @@ const createUser = async (req, res) => {
             email: email,
             fullName: fullName,
         })
-            .then((data) => {
+            .then(async (data) => {
                 console.log("New User Created!");
                 res.status(201).json({
                     user: userInfo(data),
@@ -41,6 +41,23 @@ const createUser = async (req, res) => {
 
 const getUser = (req, res) => {
     res.send({ user: req.user });
+};
+
+const getAll = (req, res) => {
+    User.find({})
+        .then((data) => {
+            var users = [];
+            data.forEach((user) => {
+                users.push(userInfo(user));
+            });
+            res.status(201).json({
+                users: users,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 };
 
 const updateUser = (req, res) => {
@@ -120,6 +137,7 @@ const logout = (req, res) => {
 module.exports = {
     createUser,
     getUser,
+    getAll,
     updateUser,
     deleteUser,
     login,

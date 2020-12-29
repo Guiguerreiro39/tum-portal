@@ -78,12 +78,9 @@ const store = new Vuex.Store({
                     withCredentials: true,
                 })
                     .then((res) => {
-                        const user = res.data.user;
-                        commit("auth_success", user);
                         resolve(res);
                     })
                     .catch((err) => {
-                        commit("auth_error");
                         reject(err);
                     });
             });
@@ -160,6 +157,21 @@ const store = new Vuex.Store({
                     .then((res) => {
                         commit("update_user", res.data.user);
                         resolve(res.data.user);
+                    })
+                    .catch((err) => {
+                        reject(err);
+                    });
+            });
+        },
+        getAllUsers() {
+            return new Promise((resolve, reject) => {
+                axios({
+                    method: "get",
+                    url: `${process.env.VUE_APP_API}/users`,
+                    withCredentials: true,
+                })
+                    .then((res) => {
+                        resolve(res.data.users);
                     })
                     .catch((err) => {
                         reject(err);
