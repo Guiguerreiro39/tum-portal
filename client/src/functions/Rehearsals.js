@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export function getRehearsal(date) {
-    console.log(date);
     return new Promise((resolve, reject) => {
         axios({
             method: "get",
