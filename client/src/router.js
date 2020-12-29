@@ -10,6 +10,7 @@ import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Edit from "./views/Edit.vue";
 import Rehearsals from "./views/Rehearsals.vue";
+import Events from "./views/Events.vue";
 
 Vue.use(Router);
 
@@ -43,6 +44,11 @@ const router = new Router({
             meta: {
                 requiresAuth: true,
             },
+        },
+        {
+            path: "/events",
+            name: "events",
+            component: Events,
         },
         {
             path: "/profile",

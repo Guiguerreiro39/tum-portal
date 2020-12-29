@@ -24,7 +24,8 @@ const {
     getEvent,
     updateEvent,
     deleteEvent,
-} = require("../controllers/event_controller");*/
+} = require("../controllers/event_controller");
+*/
 
 const router = express.Router();
 
@@ -48,6 +49,6 @@ router
     .get("/event/",getEvent)
     .put("/event/:id", updateEvent)
     .delete("/event/:id", deleteEvent)
-
 */
+
 module.exports = router;

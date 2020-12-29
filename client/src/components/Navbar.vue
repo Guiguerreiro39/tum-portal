@@ -4,7 +4,7 @@
             <router-link to="/" class="mr-10">Vermelhinhos</router-link>
         </div>
         <div class="nav-center">
-            <router-link to="/about" class="nav-link">Eventos</router-link>
+            <router-link to="/events" class="nav-link">Eventos</router-link>
             <router-link to="/rehearsals" class="nav-link">Ensaios</router-link>
             <router-link to="/about" class="nav-link">Festivais</router-link>
         </div>
