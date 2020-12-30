@@ -1,5 +1,5 @@
 <template>
-    <div class="py-4">
+    <div class="py-4" v-if="users.length > 0">
         <div
             v-for="(user, index) in users"
             :key="index"

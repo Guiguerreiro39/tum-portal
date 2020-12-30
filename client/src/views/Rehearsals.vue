@@ -10,10 +10,7 @@
                 @addPresence="addPresence"
                 @removePresence="removePresence"
             />
-            <div
-                class="grid grid-cols-2 divide-solid divide-x h-5/6"
-                v-if="allUsers.length > 0"
-            >
+            <div class="grid grid-cols-2 divide-solid divide-x h-80">
                 <Table
                     :users="leftUsers"
                     :selectedUsers="leftSelected"
@@ -120,7 +117,7 @@ export default {
             }
         },
         removePresence() {
-            if (this.rightSelected > 0) {
+            if (this.rightSelected.length > 0) {
                 const users = this.rightSelected.map(
                     (user) => this.rightUsers[user]
                 );
@@ -164,9 +161,9 @@ export default {
         });
 
         var now = new Date();
+        now.setHours(0, 0, 0, 0);
         var currentMs = now.getTime();
         if (now.getDay() === 2 || now.getDay() === 4) {
-            now.setHours(0, 0, 0, 0);
             this.time = now;
         } else if (now.getDay() < 2) {
             var daysAfterLastThursday = -7 + 4 - now.getDay();
