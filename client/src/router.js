@@ -49,6 +49,9 @@ const router = new Router({
             path: "/events",
             name: "events",
             component: Events,
+            meta: {
+                requiresAuth: true,
+            },
         },
         {
             path: "/profile",

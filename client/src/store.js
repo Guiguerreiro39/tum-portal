@@ -178,6 +178,21 @@ const store = new Vuex.Store({
                     });
             });
         },
+        getAllEvents() {
+            return new Promise((resolve, reject) => {
+                axios({
+                    method: "get",
+                    url: `${process.env.VUE_APP_API}/events`,
+                    withCredentials: true,
+                })
+                    .then((res) => {
+                        resolve(res.data.events);
+                    })
+                    .catch((err) => {
+                        reject(err);
+                    });
+            });
+        },
     },
 });
 
