@@ -5,7 +5,7 @@ const auth = require("../middleware/auth_middleware");
 const {
     createUser,
     getUser,
-    getAll,
+    getAllUsers,
     updateUser,
     deleteUser,
     login,
@@ -20,20 +20,21 @@ const {
     deleteRehearsal,
 } = require("../controllers/rehearsal_controller");
 
-/*const {
+const {
     createEvent,
     getEvent,
     updateEvent,
     deleteEvent,
+    getAllEvents,
 } = require("../controllers/event_controller");
-*/
+
 
 const router = express.Router();
 
 router
     .post("/user/", createUser)
     .get("/user/", getUser)
-    .get("/users/", auth.isAuthenticated, getAll)
+    .get("/users/", auth.isAuthenticated, getAllUsers)
     .put("/user/:id", auth.isAuthenticated, auth.isPrivate, upload, updateUser)
     .delete("/user/:id", auth.isAuthenticated, auth.isPrivate, deleteUser)
     .post("/login/", login)
@@ -45,12 +46,13 @@ router
     .get("/rehearsal/extra", auth.isAuthenticated, getAllExtra)
     .put("/rehearsal/:id", auth.isAuthenticated, updateRehearsal)
     .delete("/rehearsal/:id", auth.isAuthenticated, deleteRehearsal);
-/*
+
 router
-    .post("/event/",createEvent)
-    .get("/event/",getEvent)
-    .put("/event/:id", updateEvent)
-    .delete("/event/:id", deleteEvent)
-*/
+    .post("/event/",auth.isAuthenticated,createEvent)
+    .get("/event/",auth.isAuthenticated,getEvent)
+    .get("/events/", auth.isAuthenticated, getAllEvents)
+    .put("/event/:id", auth.isAuthenticated,updateEvent)
+    .delete("/event/:id",auth.isAuthenticated, deleteEvent)
+
 
 module.exports = router;

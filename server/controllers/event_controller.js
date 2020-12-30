@@ -1,6 +1,7 @@
 "use strict";
 
 const { eventExists } = require("../functions/event_functions");
+const eventInfo = require("../constants/eventInfo");
 
 const Event = require("../models/event_schema");
 
@@ -76,9 +77,27 @@ const deleteEvent = (req, res) => {
         });
 };
 
+const getAllEvents = (req, res) => {
+    Event.find({})
+        .then((data) => {
+            var events = [];
+            data.forEach((event) => {
+                events.push(eventInfo(event));
+            });
+            res.status(201).json({
+                events: events,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+};
+
 module.exports = {
     createEvent,
     getEvent,
     updateEvent,
     deleteEvent,
+    getAllEvents,
 };

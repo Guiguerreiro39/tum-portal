@@ -43,7 +43,7 @@ const getUser = (req, res) => {
     res.send({ user: req.user });
 };
 
-const getAll = (req, res) => {
+const getAllUsers = (req, res) => {
     User.find({})
         .then((data) => {
             var users = [];
@@ -137,7 +137,7 @@ const logout = (req, res) => {
 module.exports = {
     createUser,
     getUser,
-    getAll,
+    getAllUsers,
     updateUser,
     deleteUser,
     login,
