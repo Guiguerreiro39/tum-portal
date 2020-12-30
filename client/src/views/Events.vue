@@ -1,7 +1,7 @@
 <template>
     <div class="header-text">
       <div
-          v-for="(event, index) in events"
+          v-for="(event, index) in allEvents"
           :key="index"
           >
       <h2 class="eventName">{{ event.eventName }}</h2>
