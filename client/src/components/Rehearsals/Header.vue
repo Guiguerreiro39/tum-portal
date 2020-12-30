@@ -28,7 +28,7 @@ export default {
     components: {
         DatePicker,
     },
-    props: ["time"],
+    props: ["time", "extras"],
     data() {
         return {
             date: null,
@@ -47,8 +47,11 @@ export default {
     },
     methods: {
         disabledDate(date) {
+            const extraDates = this.extras.map((d) => new Date(d).getTime());
             return (
-                (date.getDay() !== 2 && date.getDay() !== 4) ||
+                (date.getDay() !== 2 &&
+                    date.getDay() !== 4 &&
+                    !extraDates.includes(new Date(date).getTime())) ||
                 date > new Date()
             );
         },

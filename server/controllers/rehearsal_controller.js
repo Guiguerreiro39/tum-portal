@@ -31,6 +31,18 @@ const getRehearsal = (req, res) => {
         });
 };
 
+const getAllExtra = (req, res) => {
+    Rehearsal.find({}).then((data) => {
+        var array = data.filter((d) => {
+            var date = new Date(d.date);
+            return date.getDay() !== 2 && date.getDay() !== 4;
+        });
+        res.status(201).json({
+            rehearsals: array.map((d) => d.date),
+        });
+    });
+};
+
 const updateRehearsal = async (req, res) => {
     var users = [];
     var mapToUsers = new Promise((resolve, reject) => {
@@ -96,6 +108,7 @@ const deleteRehearsal = (req, res) => {
 module.exports = {
     createRehearsal,
     getRehearsal,
+    getAllExtra,
     updateRehearsal,
     deleteRehearsal,
 };

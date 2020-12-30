@@ -28,6 +28,23 @@ export function getRehearsal(date) {
     });
 }
 
+export function getAllExtra() {
+    return new Promise((resolve, reject) => {
+        axios({
+            method: "get",
+            url: `${process.env.VUE_APP_API}/rehearsal/extra`,
+            withCredentials: true,
+        })
+            .then((res) => {
+                resolve(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+                reject(err);
+            });
+    });
+}
+
 export function createRehearsal(date) {
     return new Promise((resolve, reject) => {
         axios({

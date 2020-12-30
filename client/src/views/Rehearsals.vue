@@ -1,10 +1,11 @@
 <template>
-    <div class="flex justify-center h-full pt-10">
+    <div class="flex flex-col items-center h-full pt-10">
         <div
             class="bg-white h-2/3 w-1/2 rounded-lg shadow-md divide-solid divide-y px-5"
         >
             <Header
                 :time="time"
+                :extras="allExtra"
                 @timeChange="timeChange"
                 @addPresence="addPresence"
                 @removePresence="removePresence"
@@ -25,17 +26,27 @@
                 />
             </div>
         </div>
+        <div class="bg-white w-1/2 rounded-lg shadow-md mt-3 px-5 py-4">
+            <NewDate @newExtra="newExtra" />
+        </div>
     </div>
 </template>
 
 <script>
 import Header from "../components/Rehearsals/Header.vue";
 import Table from "../components/Rehearsals/Table.vue";
-import { getRehearsal, updateRehearsal } from "../functions/Rehearsals.js";
+import NewDate from "../components/Rehearsals/NewDate.vue";
+import {
+    getRehearsal,
+    getAllExtra,
+    updateRehearsal,
+    createRehearsal,
+} from "../functions/Rehearsals.js";
 export default {
     components: {
         Table,
         Header,
+        NewDate,
     },
     data() {
         return {
@@ -45,10 +56,17 @@ export default {
             leftSelected: [],
             rightSelected: [],
             allUsers: [],
+            allExtra: [],
             id: null,
         };
     },
     methods: {
+        newExtra(value) {
+            const aux = this.allExtra.map((d) => new Date(d).getTime());
+            if (!aux.includes(new Date(value).getTime()))
+                createRehearsal(value);
+            this.allExtra.push(value);
+        },
         timeChange(value) {
             this.leftSelected = [];
             this.rightSelected = [];
@@ -77,49 +95,55 @@ export default {
                 });
         },
         addPresence() {
-            const users = this.leftSelected.map((user) => this.leftUsers[user]);
+            if (this.leftSelected.length > 0) {
+                const users = this.leftSelected.map(
+                    (user) => this.leftUsers[user]
+                );
 
-            updateRehearsal(this.id, [...this.rightUsers, ...users])
-                .then((res) => {
-                    this.rightUsers = [];
-                    res.users.forEach((user) => {
-                        const index = this.allUsers
-                            .map((u) => u.id)
-                            .indexOf(user);
-                        this.rightUsers.push(this.allUsers[index]);
+                updateRehearsal(this.id, [...this.rightUsers, ...users])
+                    .then((res) => {
+                        this.rightUsers = [];
+                        res.users.forEach((user) => {
+                            const index = this.allUsers
+                                .map((u) => u.id)
+                                .indexOf(user);
+                            this.rightUsers.push(this.allUsers[index]);
+                        });
+                        this.leftUsers = this.leftUsers.filter(
+                            (user, index) => !this.leftSelected.includes(index)
+                        );
+                        this.leftSelected = [];
+                    })
+                    .catch((err) => {
+                        console.log(err);
                     });
-                    this.leftUsers = this.leftUsers.filter(
-                        (user, index) => !this.leftSelected.includes(index)
-                    );
-                    this.leftSelected = [];
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
+            }
         },
         removePresence() {
-            const users = this.rightSelected.map(
-                (user) => this.rightUsers[user]
-            );
-            const newRightUsers = this.rightUsers.filter(
-                (u, index) => !this.rightSelected.includes(index)
-            );
+            if (this.rightSelected > 0) {
+                const users = this.rightSelected.map(
+                    (user) => this.rightUsers[user]
+                );
+                const newRightUsers = this.rightUsers.filter(
+                    (u, index) => !this.rightSelected.includes(index)
+                );
 
-            updateRehearsal(this.id, newRightUsers)
-                .then((res) => {
-                    this.leftUsers = [...this.allUsers];
-                    res.users.forEach((user) => {
-                        const index = this.leftUsers
-                            .map((u) => u.id)
-                            .indexOf(user);
-                        this.leftUsers.splice(index, 1);
+                updateRehearsal(this.id, newRightUsers)
+                    .then((res) => {
+                        this.leftUsers = [...this.allUsers];
+                        res.users.forEach((user) => {
+                            const index = this.leftUsers
+                                .map((u) => u.id)
+                                .indexOf(user);
+                            this.leftUsers.splice(index, 1);
+                        });
+                        this.rightUsers = newRightUsers;
+                        this.rightSelected = [];
+                    })
+                    .catch((err) => {
+                        console.log(err);
                     });
-                    this.rightUsers = newRightUsers;
-                    this.rightSelected = [];
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
+            }
         },
     },
     created() {
@@ -133,6 +157,10 @@ export default {
                 });
             });
             this.allUsers = users;
+        });
+
+        getAllExtra().then((res) => {
+            this.allExtra = res.rehearsals;
         });
 
         var now = new Date();

@@ -15,6 +15,7 @@ const {
 const {
     createRehearsal,
     getRehearsal,
+    getAllExtra,
     updateRehearsal,
     deleteRehearsal,
 } = require("../controllers/rehearsal_controller");
@@ -41,6 +42,7 @@ router
 router
     .post("/rehearsal/", auth.isAuthenticated, createRehearsal)
     .get("/rehearsal/", auth.isAuthenticated, getRehearsal)
+    .get("/rehearsal/extra", auth.isAuthenticated, getAllExtra)
     .put("/rehearsal/:id", auth.isAuthenticated, updateRehearsal)
     .delete("/rehearsal/:id", auth.isAuthenticated, deleteRehearsal);
 /*
