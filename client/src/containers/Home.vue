@@ -1,7 +1,8 @@
 <template>
     <div class="home">
         <Navbar />
-        <div class="container mx-auto pt-14 h-full">
+        <Sidebar />
+        <div class="container mx-auto pt-14 h-full ">
             <router-view />
         </div>
     </div>
@@ -9,10 +10,12 @@
 
 <script>
 import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 export default {
     name: "home",
     components: {
         Navbar,
+        Sidebar,
     },
 };
 </script>

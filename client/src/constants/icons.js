@@ -4,6 +4,7 @@ import {
     faYoutube,
     faInstagram,
     faSpotify,
+    faItunesNote,
 } from "@fortawesome/free-brands-svg-icons";
 import {
     faCameraRetro,
@@ -11,15 +12,25 @@ import {
     faSave,
     faArrowLeft,
     faArrowRight,
+    faSignOutAlt,
+    faGlassCheers,
+    faHome,
 } from "@fortawesome/free-solid-svg-icons";
+import { faBell } from "@fortawesome/free-regular-svg-icons";
 
 library.add(faFacebook);
 library.add(faInstagram);
 library.add(faYoutube);
 library.add(faSpotify);
+library.add(faItunesNote);
 
 library.add(faCameraRetro);
 library.add(faEdit);
 library.add(faSave);
 library.add(faArrowLeft);
 library.add(faArrowRight);
+library.add(faSignOutAlt);
+library.add(faGlassCheers);
+library.add(faHome);
+
+library.add(faBell);

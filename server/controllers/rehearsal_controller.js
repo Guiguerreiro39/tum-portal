@@ -45,7 +45,6 @@ const getAllExtra = (req, res) => {
 
 const updateRehearsal = async (req, res) => {
     var users = [];
-    console.log(req.body.users);
 
     if (req.body.users.length > 0) {
         var mapToUsers = new Promise((resolve, reject) => {

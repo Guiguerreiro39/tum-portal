@@ -1,9 +1,9 @@
 <template>
-    <div class="py-4" v-if="users.length > 0">
+    <div class="py-4">
         <div
             v-for="(user, index) in users"
             :key="index"
-            class="flex justify-start cursor-pointer py-1 pl-10 my-1 rounded-full select-none"
+            class="users"
             :class="[
                 selected.includes(index)
                     ? 'bg-red-500 text-white'
@@ -15,9 +15,9 @@
             <img
                 :src="profileImageURL(user.profileImage)"
                 alt="User Profile Image"
-                class="h-6 w-6 object-cover rounded-full"
+                class="user-image"
             />
-            <h1 class="ml-2 capitalize font-medium">
+            <h1 class="username">
                 {{ user.username }}
             </h1>
         </div>
@@ -54,4 +54,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="postcss">
+.users {
+    @apply flex justify-start cursor-pointer py-1 pl-10 my-1 rounded-full select-none;
+}
+.user-image {
+    @apply h-6 w-6 object-cover rounded-full;
+}
+.username {
+    @apply ml-2 capitalize font-medium;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col items-center mt-4 mb-2">
+    <div class="header">
         <DatePicker
             v-model="date"
             format="DD/MM/YYYY"
@@ -8,12 +8,12 @@
         <div class="mt-2">
             <font-awesome-icon
                 :icon="['fas', 'arrow-left']"
-                class="mx-6 text-2xl text-gray-600 cursor-pointer"
+                class="arrow"
                 @click="$emit('removePresence')"
             />
             <font-awesome-icon
                 :icon="['fas', 'arrow-right']"
-                class="mx-6 text-2xl text-gray-600 cursor-pointer"
+                class="arrow"
                 @click="$emit('addPresence')"
             />
         </div>
@@ -59,4 +59,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="postcss">
+.header {
+    @apply flex flex-col items-center mt-4 mb-2;
+}
+.arrow {
+    @apply mx-6 text-2xl text-gray-600 cursor-pointer;
+}
+</style>

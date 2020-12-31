@@ -3,10 +3,7 @@
         <h1 class="font-medium">Ensaio Extraordinário</h1>
         <div>
             <DatePicker v-model="date" format="DD/MM/YYYY" />
-            <button
-                class="bg-green-500 py-1 px-2 rounded-lg text-white inline-block ml-4 hover:bg-green-600"
-                @click="createExtra()"
-            >
+            <button class="create-btn" @click="createExtra()">
                 Criar
             </button>
         </div>
@@ -39,4 +36,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="postcss">
+.create-btn {
+    @apply bg-green-500 py-1 px-2 rounded-lg text-white inline-block ml-4 hover:bg-green-600;
+}
+</style>

@@ -1,8 +1,6 @@
 <template>
-    <div class="flex flex-col items-center h-full pt-10">
-        <div
-            class="bg-white h-2/3 w-1/2 rounded-lg shadow-md divide-solid divide-y px-5"
-        >
+    <div class="rehearsals">
+        <div class="list">
             <Header
                 :time="time"
                 :extras="allExtra"
@@ -10,7 +8,7 @@
                 @addPresence="addPresence"
                 @removePresence="removePresence"
             />
-            <div class="grid grid-cols-2 divide-solid divide-x h-80">
+            <div class="tables">
                 <Table
                     :users="leftUsers"
                     :selectedUsers="leftSelected"
@@ -23,7 +21,7 @@
                 />
             </div>
         </div>
-        <div class="bg-white w-1/2 rounded-lg shadow-md mt-3 px-5 py-4">
+        <div class="extras">
             <NewDate @newExtra="newExtra" />
         </div>
     </div>
@@ -143,9 +141,9 @@ export default {
             }
         },
     },
-    created() {
+    async created() {
         var users = [];
-        this.$store.dispatch("getAllUsers").then((res) => {
+        await this.$store.dispatch("getAllUsers").then((res) => {
             res.forEach((user) => {
                 users.push({
                     id: user.id,
@@ -185,4 +183,17 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="postcss">
+.rehearsals {
+    @apply flex flex-col items-center h-full pt-10;
+}
+.list {
+    @apply bg-white h-2/3 w-1/2 rounded-lg shadow-md divide-solid divide-y px-5;
+}
+.tables {
+    @apply grid grid-cols-2 divide-solid divide-x h-80;
+}
+.extras {
+    @apply bg-white w-1/2 rounded-lg shadow-md mt-3 px-5 py-4;
+}
+</style>
