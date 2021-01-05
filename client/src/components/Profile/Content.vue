@@ -103,7 +103,7 @@ export default {
 
 <style scoped lang="postcss">
 .content {
-    @apply grid grid-cols-2 gap-4 w-1/2 mt-5;
+    @apply grid grid-cols-2 gap-4 w-2/3 mt-5;
 }
 .card {
     @apply col-span-1 bg-white rounded-lg divide-y divide-solid p-5 shadow-md;

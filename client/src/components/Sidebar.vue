@@ -15,7 +15,7 @@
                 :class="{ selected: routeName == 'events' }"
             >
                 <font-awesome-icon
-                    :icon="['fab', 'itunes-note']"
+                    :icon="['fas', 'glass-cheers']"
                 ></font-awesome-icon>
                 <p class="inline ml-3">Eventos</p>
             </router-link>
@@ -30,14 +30,14 @@
                 <p class="inline ml-3">Ensaios</p>
             </router-link>
             <router-link
-                to="/about"
+                to="/vote"
                 class="side-link"
-                :class="{ selected: routeName == 'about' }"
+                :class="{ selected: routeName == 'vote' }"
             >
                 <font-awesome-icon
-                    :icon="['fas', 'glass-cheers']"
+                    :icon="['fas', 'vote-yea']"
                 ></font-awesome-icon>
-                <p class="inline ml-3">Festivais</p>
+                <p class="inline ml-3">Votação</p>
             </router-link>
         </div>
         <div class="side-footer">
@@ -75,7 +75,7 @@ export default {
 
 <style scoped lang="postcss">
 .sidebar {
-    @apply fixed w-56 bottom-0 bg-red-600 rounded-tr-3xl text-white px-5 h-90 flex flex-col justify-between py-8;
+    @apply fixed w-56 bottom-0 bg-red-600 shadow-side rounded-tr-3xl text-white px-5 h-90 flex flex-col justify-between py-8;
 }
 .side-head {
     @apply flex flex-col text-lg font-medium;
@@ -90,7 +90,7 @@ export default {
     @apply my-2 w-full rounded-full py-2 text-center cursor-pointer;
 }
 .side-link.selected {
-    @apply bg-red-500;
+    @apply bg-red-500 shadow;
 }
 .side-link:hover:not(.selected) {
     @apply bg-gray-800 bg-opacity-25;

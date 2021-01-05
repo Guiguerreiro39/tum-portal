@@ -146,7 +146,7 @@ export default {
 
 <style scoped lang="postcss">
 .header {
-    @apply bg-white w-1/2 h-60 flex items-center rounded-lg shadow-md;
+    @apply bg-white w-2/3 h-60 flex items-center rounded-lg shadow-md;
 }
 .options {
     @apply py-1 mt-2 capitalize border border-transparent rounded-lg;

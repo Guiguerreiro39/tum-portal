@@ -11,6 +11,7 @@ import Register from "./views/Register.vue";
 import Edit from "./views/Edit.vue";
 import Rehearsals from "./views/Rehearsals.vue";
 import Events from "./views/Events.vue";
+import Vote from "./views/Vote.vue";
 
 Vue.use(Router);
 
@@ -41,6 +42,14 @@ const router = new Router({
             path: "/rehearsals",
             name: "rehearsals",
             component: Rehearsals,
+            meta: {
+                requiresAuth: true,
+            },
+        },
+        {
+            path: "/vote",
+            name: "vote",
+            component: Vote,
             meta: {
                 requiresAuth: true,
             },

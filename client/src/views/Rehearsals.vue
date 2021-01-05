@@ -65,7 +65,6 @@ export default {
         timeChange(value) {
             this.leftSelected = [];
             this.rightSelected = [];
-            this.leftUsers = [];
             this.rightUsers = [];
             getRehearsal(value)
                 .then((res) => {
@@ -185,15 +184,15 @@ export default {
 
 <style scoped lang="postcss">
 .rehearsals {
-    @apply flex flex-col items-center h-full pt-10;
+    @apply flex flex-col items-center h-full;
 }
 .list {
-    @apply bg-white h-2/3 w-1/2 rounded-lg shadow-md divide-solid divide-y px-5;
+    @apply bg-white h-2/3 w-2/3 rounded-lg shadow-md divide-solid divide-y px-5;
 }
 .tables {
     @apply grid grid-cols-2 divide-solid divide-x h-80;
 }
 .extras {
-    @apply bg-white w-1/2 rounded-lg shadow-md mt-3 px-5 py-4;
+    @apply bg-white w-2/3 rounded-lg shadow-md mt-3 px-5 py-4;
 }
 </style>

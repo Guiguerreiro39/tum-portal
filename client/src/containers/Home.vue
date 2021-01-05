@@ -2,7 +2,7 @@
     <div class="home">
         <Navbar />
         <Sidebar />
-        <div class="container mx-auto pt-14 h-full ">
+        <div class="container mx-auto pt-24 pl-56 h-full ">
             <router-view />
         </div>
     </div>

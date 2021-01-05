@@ -18,6 +18,6 @@ export default {
 
 <style scoped lang="postcss">
 .profile {
-    @apply flex flex-col items-center h-full pt-8;
+    @apply flex flex-col items-center h-full;
 }
 </style>

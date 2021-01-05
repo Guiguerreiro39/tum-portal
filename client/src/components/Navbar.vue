@@ -58,7 +58,7 @@ export default {
 
 <style scoped lang="postcss">
 .nav {
-    @apply fixed top-0 w-full px-10 mt-4 flex justify-between items-center text-gray-800 font-medium;
+    @apply fixed top-0 w-full px-10 h-20 flex justify-between items-center text-gray-800 font-medium;
 }
 .nav-right {
     @apply relative;
