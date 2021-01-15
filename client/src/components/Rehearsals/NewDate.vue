@@ -38,6 +38,9 @@ export default {
 
 <style scoped lang="postcss">
 .create-btn {
-    @apply bg-green-500 py-1 px-2 rounded-lg text-white inline-block ml-4 hover:bg-green-600;
+    @apply bg-green-500 py-1 px-2 rounded-lg text-white inline-block ml-4;
+}
+.create-btn:hover {
+    @apply bg-green-600;
 }
 </style>

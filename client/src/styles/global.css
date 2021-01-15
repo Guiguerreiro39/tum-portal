@@ -1,4 +1,7 @@
 body {
-    height: 100vh;
-    width: 100vw;
+    @apply text-gray-800 h-screen w-screen;
+}
+
+.k-progress .k-progress-outer {
+    @apply p-0;
 }

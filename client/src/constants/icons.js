@@ -16,6 +16,8 @@ import {
     faGlassCheers,
     faHome,
     faVoteYea,
+    faPlus,
+    faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 
@@ -34,5 +36,7 @@ library.add(faSignOutAlt);
 library.add(faGlassCheers);
 library.add(faHome);
 library.add(faVoteYea);
+library.add(faPlus);
+library.add(faTimes);
 
 library.add(faBell);

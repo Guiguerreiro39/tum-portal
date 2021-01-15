@@ -141,6 +141,8 @@ export default {
         },
     },
     async created() {
+        if (this.$store.getters.authStatus.length === 0) return;
+
         var users = [];
         await this.$store.dispatch("getAllUsers").then((res) => {
             res.forEach((user) => {
@@ -184,15 +186,15 @@ export default {
 
 <style scoped lang="postcss">
 .rehearsals {
-    @apply flex flex-col items-center h-full;
+    @apply grid grid-rows-5 items-center h-full p-10 w-2/3 mx-auto;
 }
 .list {
-    @apply bg-white h-2/3 w-2/3 rounded-lg shadow-md divide-solid divide-y px-5;
+    @apply bg-white row-span-4 rounded-lg shadow-md divide-solid divide-y px-5 h-full;
 }
 .tables {
-    @apply grid grid-cols-2 divide-solid divide-x h-80;
+    @apply grid grid-cols-2 divide-solid divide-x;
 }
 .extras {
-    @apply bg-white w-2/3 rounded-lg shadow-md mt-3 px-5 py-4;
+    @apply bg-white row-span-1 rounded-lg shadow-md px-5 py-4;
 }
 </style>

@@ -41,11 +41,11 @@
             </router-link>
         </div>
         <div class="side-footer">
-            <div class="logout">
+            <div class="logout" @click="logout">
                 <font-awesome-icon
                     :icon="['fas', 'sign-out-alt']"
                 ></font-awesome-icon>
-                <span @click="logout" class="ml-3">Sair</span>
+                <p class="ml-3 inline">Sair</p>
             </div>
         </div>
     </nav>

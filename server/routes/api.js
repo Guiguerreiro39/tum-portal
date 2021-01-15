@@ -28,6 +28,13 @@ const {
     getAllEvents,
 } = require("../controllers/event_controller");
 
+const {
+    createVote,
+    getVote,
+    updateVote,
+    deleteVote,
+    getAllVotes,
+} = require("../controllers/vote_controller");
 
 const router = express.Router();
 
@@ -48,11 +55,17 @@ router
     .delete("/rehearsal/:id", auth.isAuthenticated, deleteRehearsal);
 
 router
-    .post("/event/",auth.isAuthenticated,createEvent)
-    .get("/event/",auth.isAuthenticated,getEvent)
+    .post("/event/", auth.isAuthenticated, createEvent)
+    .get("/event/", auth.isAuthenticated, getEvent)
     .get("/events/", auth.isAuthenticated, getAllEvents)
-    .put("/event/:id", auth.isAuthenticated,updateEvent)
-    .delete("/event/:id",auth.isAuthenticated, deleteEvent)
+    .put("/event/:id", auth.isAuthenticated, updateEvent)
+    .delete("/event/:id", auth.isAuthenticated, deleteEvent);
 
+router
+    .post("/vote/", auth.isAuthenticated, createVote)
+    .get("/vote/", auth.isAuthenticated, getAllVotes)
+    .get("/vote/:id", auth.isAuthenticated, getVote)
+    .put("/vote/:id", auth.isAuthenticated, updateVote)
+    .delete("/vote/:id", auth.isAuthenticated, deleteVote);
 
 module.exports = router;
