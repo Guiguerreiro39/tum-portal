@@ -21,11 +21,11 @@ export function getVote(id) {
     });
 }
 
-export function getAllVotes() {
+export function getAllVotes(page) {
     return new Promise((resolve, reject) => {
         axios({
             method: "get",
-            url: `${process.env.VUE_APP_API}/vote`,
+            url: `${process.env.VUE_APP_API}/vote?page=${page}`,
             withCredentials: true,
         })
             .then((res) => {

@@ -30,7 +30,6 @@ export default {
     data() {
         return {
             selected: this.selectedUsers,
-            now: Date.now(),
         };
     },
     watch: {
@@ -41,8 +40,7 @@ export default {
     },
     methods: {
         profileImageURL(url) {
-            this.now = Date.now();
-            return `${process.env.VUE_APP_API}/${url}?rnd=${this.now}`;
+            return `${process.env.VUE_APP_API}/${url}`;
         },
         toggleUser(user) {
             const index = this.selected.indexOf(user);

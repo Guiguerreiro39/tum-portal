@@ -1,5 +1,5 @@
 <template>
-    <div class="rehearsals">
+    <div class="rehearsals" v-if="isMounted">
         <div class="list">
             <Header
                 :time="time"
@@ -53,6 +53,7 @@ export default {
             allUsers: [],
             allExtra: [],
             id: null,
+            isMounted: false,
         };
     },
     methods: {
@@ -180,6 +181,8 @@ export default {
                 currentMs + daysAfterLastThursday * 24 * 60 * 60 * 1000
             );
         }
+
+        this.isMounted = true;
     },
 };
 </script>

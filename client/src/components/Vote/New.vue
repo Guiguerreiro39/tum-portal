@@ -53,6 +53,10 @@
                     v-model="dateTime"
                     type="datetime"
                     placeholder="Data final da votação"
+                    :default-value="new Date()"
+                    :disabled-date="disabledDate"
+                    :disabled-time="disabledTime"
+                    format="DD/MM/YYYY HH:mm"
                 />
             </div>
         </div>
@@ -106,6 +110,20 @@ export default {
                         this.$emit("closeModal");
                     });
             }
+        },
+        disabledDate(date) {
+            var today = new Date(
+                new Date().getFullYear(),
+                new Date().getMonth(),
+                new Date().getDate()
+            );
+            return date.getTime() < today.getTime();
+        },
+        disabledTime(date) {
+            if (date.getHours() < new Date().getHours()) return true;
+            else if (date.getHours() == new Date().getHours())
+                return date.getMinutes() < new Date().getMinutes();
+            else return false;
         },
     },
 };

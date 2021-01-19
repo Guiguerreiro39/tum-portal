@@ -1,7 +1,7 @@
 <template>
-    <div class="vote">
+    <div class="vote" v-if="isMounted">
         <div class="content">
-            <div class="card">
+            <div class="card" v-if="pager.currentPage === 1">
                 <div class="new">
                     <button class="btn-new" @click="openModalNew()">
                         <div>
@@ -28,6 +28,7 @@
             @updateVote="updateVote"
             :vote="votes[modalIndex]"
         />
+        <Pagination :pager="pager" @pageChange="handlePageChange" />
     </div>
 </template>
 
@@ -35,6 +36,7 @@
 import Card from "../components/Vote/Card.vue";
 import New from "../components/Vote/New.vue";
 import Voting from "../components/Vote/Voting.vue";
+import Pagination from "../components/Pagination.vue";
 
 import { getAllVotes } from "../functions/Vote";
 
@@ -43,6 +45,7 @@ export default {
         Card,
         New,
         Voting,
+        Pagination,
     },
     data() {
         return {
@@ -51,16 +54,12 @@ export default {
             isNewOpen: false,
             votes: [],
             modalIndex: Number,
+            isMounted: false,
+            pager: null,
         };
     },
-    created() {
-        getAllVotes()
-            .then((data) => {
-                this.votes = data;
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+    async created() {
+        await this.requestVotes(1);
     },
     methods: {
         openModalVote(index) {
@@ -78,15 +77,29 @@ export default {
             this.isNewOpen = false;
         },
         updateVote(data) {
-            console.log(data);
             this.votes.forEach((v, i) => {
                 if (v._id === data._id) {
                     this.votes[i] = data;
                 }
             });
         },
-        newVote(data) {
-            this.votes.push(data);
+        async newVote(data) {
+            await this.requestVotes(1);
+        },
+        async handlePageChange(page) {
+            await this.requestVotes(page);
+        },
+        requestVotes(page) {
+            this.votes = [];
+            getAllVotes(page)
+                .then((res) => {
+                    this.pager = res.pager;
+                    this.votes = res.data;
+                    this.isMounted = true;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         },
     },
 };
@@ -94,7 +107,7 @@ export default {
 
 <style scoped lang="postcss">
 .vote {
-    @apply p-10 w-full h-full;
+    @apply px-10 pt-5 pb-20 w-full h-full;
 }
 .content {
     @apply h-full grid grid-cols-4 grid-rows-2 gap-3;

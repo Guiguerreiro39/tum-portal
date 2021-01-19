@@ -65,7 +65,9 @@ export default {
             return this.vote.question;
         },
         options: function() {
-            return this.vote.options;
+            return this.vote.options.sort((a, b) => {
+                return b.users.length - a.users.length;
+            });
         },
         id: function() {
             return this.vote._id;

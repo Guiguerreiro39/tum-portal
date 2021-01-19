@@ -29,7 +29,7 @@ export default {
 
             let result;
 
-            if (seconds < 0) {
+            if (timeToFinish < 0) {
                 this.isFinished = true;
                 this.$emit("finish");
                 clearInterval(this.interval);
