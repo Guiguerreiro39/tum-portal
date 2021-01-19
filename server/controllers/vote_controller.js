@@ -3,6 +3,8 @@
 const Vote = require("../models/vote_schema");
 const User = require("../models/user_schema");
 
+const paginate = require("jw-paginate");
+
 const createVote = (req, res) => {
     Vote.create(req.body)
         .then((data) => {
@@ -30,10 +32,22 @@ const getVote = (req, res) => {
         });
 };
 
-const getAllVotes = (req, res) => {
-    Vote.find({})
+const getAllVotes = async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = page === 1 ? 7 : 8;
+    const totalItems = await Vote.countDocuments().exec();
+
+    const pager = paginate(totalItems, page, limit);
+
+    Vote.find()
+        .sort({ createdAt: "desc" })
+        .limit(limit)
+        .skip(pager.startIndex)
         .then((data) => {
-            res.status(201).json(data);
+            res.status(201).json({
+                pager,
+                data: data,
+            });
         })
         .catch((err) => {
             console.log(err);
@@ -44,24 +58,27 @@ const getAllVotes = (req, res) => {
 const updateVote = async (req, res) => {
     var options = [];
     var duplicated = false;
+    var now = new Date();
 
     var mapToOptions = new Promise((resolve, reject) => {
         Vote.findById(req.params.id)
             .then((data) => {
                 User.findById(req.user.id)
                     .then((u) => {
-                        options = data.options.map((option) => {
-                            option.users.forEach((user) => {
-                                if (user._id == u.id) duplicated = true;
-                            });
+                        if (new Date(data.date) >= now) {
+                            options = data.options.map((option) => {
+                                option.users.forEach((user) => {
+                                    if (user._id == u.id) duplicated = true;
+                                });
 
-                            if (option.id === req.body.vote) {
-                                if (!duplicated) option.users.push(u);
-                                return option;
-                            } else {
-                                return option;
-                            }
-                        });
+                                if (option.id === req.body.vote) {
+                                    if (!duplicated) option.users.push(u);
+                                    return option;
+                                } else {
+                                    return option;
+                                }
+                            });
+                        }
                         resolve();
                     })
                     .catch((err) => {
