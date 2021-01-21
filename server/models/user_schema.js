@@ -55,6 +55,14 @@ const userSchema = new Schema(
             type: String,
             default: "uploads/default.jpg",
         },
+        rehearsals: {
+            type: Number,
+            default: 0,
+        },
+        events: {
+            type: Number,
+            default: 0,
+        },
     },
     { timestamps: true }
 );

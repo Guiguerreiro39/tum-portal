@@ -65,13 +65,14 @@ export function createRehearsal(date) {
     });
 }
 
-export function updateRehearsal(id, users) {
+export function updateRehearsal(id, users, removed = []) {
     return new Promise((resolve, reject) => {
         axios({
             method: "put",
             url: `${process.env.VUE_APP_API}/rehearsal/${id}`,
             data: {
                 users: users,
+                removed: removed,
             },
             withCredentials: true,
         })

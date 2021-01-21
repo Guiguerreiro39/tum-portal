@@ -9,5 +9,7 @@ module.exports = function userInformation(data) {
         contact: data.contact,
         email: data.email,
         residence: data.residence,
+        rehearsals: data.rehearsals,
+        events: data.events,
     };
 };

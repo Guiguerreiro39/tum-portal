@@ -123,7 +123,7 @@ export default {
                     (u, index) => !this.rightSelected.includes(index)
                 );
 
-                updateRehearsal(this.id, newRightUsers)
+                updateRehearsal(this.id, newRightUsers, users)
                     .then((res) => {
                         this.leftUsers = [...this.allUsers];
                         res.users.forEach((user) => {
@@ -192,10 +192,10 @@ export default {
     @apply grid grid-rows-5 items-center h-full p-10 w-2/3 mx-auto;
 }
 .list {
-    @apply bg-white row-span-4 rounded-lg shadow-md divide-solid divide-y px-5 h-full;
+    @apply bg-white row-span-4 rounded-lg shadow-md divide-solid divide-y px-5 h-full overflow-hidden grid grid-rows-5;
 }
 .tables {
-    @apply grid grid-cols-2 divide-solid divide-x;
+    @apply grid grid-cols-2 divide-solid divide-x h-full row-span-4;
 }
 .extras {
     @apply bg-white row-span-1 rounded-lg shadow-md px-5 py-4;

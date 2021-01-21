@@ -37,7 +37,9 @@ const getAllVotes = async (req, res) => {
     const limit = page === 1 ? 7 : 8;
     const totalItems = await Vote.countDocuments().exec();
 
-    const pager = paginate(totalItems, page, limit);
+    let pager;
+    if (totalItems === 0) pager = paginate(1, page, limit);
+    else pager = paginate(totalItems, page, limit);
 
     Vote.find()
         .sort({ createdAt: "desc" })

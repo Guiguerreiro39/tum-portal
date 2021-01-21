@@ -1,5 +1,5 @@
 <template>
-    <div class="py-4">
+    <div class="py-4 overflow-auto">
         <div
             v-for="(user, index) in users"
             :key="index"

@@ -18,6 +18,7 @@ import {
     faVoteYea,
     faPlus,
     faTimes,
+    faMedal,
 } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 
@@ -38,5 +39,6 @@ library.add(faHome);
 library.add(faVoteYea);
 library.add(faPlus);
 library.add(faTimes);
+library.add(faMedal);
 
 library.add(faBell);

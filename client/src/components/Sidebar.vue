@@ -39,6 +39,14 @@
                 ></font-awesome-icon>
                 <p class="inline ml-3">Votação</p>
             </router-link>
+            <router-link
+                to="/ranking"
+                class="side-link"
+                :class="{ selected: routeName == 'ranking' }"
+            >
+                <font-awesome-icon :icon="['fas', 'medal']"></font-awesome-icon>
+                <p class="inline ml-3">Ranking</p>
+            </router-link>
         </div>
         <div class="side-footer">
             <div class="logout" @click="logout">

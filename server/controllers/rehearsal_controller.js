@@ -45,23 +45,52 @@ const getAllExtra = (req, res) => {
 
 const updateRehearsal = async (req, res) => {
     var users = [];
+    var rehearsalUsers = await Rehearsal.findById(req.params.id).populate(
+        "users"
+    );
+    var mapUsersToId = rehearsalUsers.users.map((u) => {
+        return u.id;
+    });
 
     if (req.body.users.length > 0) {
         var mapToUsers = new Promise((resolve, reject) => {
             req.body.users.forEach(async (u, index, array) => {
-                User.findOne({ _id: u.id })
+                User.findById(u.id)
                     .then((data) => {
+                        if (!mapUsersToId.includes(u.id)) {
+                            data.rehearsals++;
+                            data.save();
+                        }
+
                         users.push(data);
                         if (index === array.length - 1) resolve();
                     })
                     .catch((err) => {
-                        res.status(404).json(err);
-                        return;
+                        return res.status(404).json(err);
                     });
             });
         });
 
         await mapToUsers;
+    }
+
+    if (req.body.removed.length > 0) {
+        var removeRehearsal = new Promise((resolve, reject) => {
+            req.body.removed.forEach(async (u, index, array) => {
+                User.findById(u.id)
+                    .then((data) => {
+                        data.rehearsals--;
+                        data.save();
+
+                        if (index === array.length - 1) resolve();
+                    })
+                    .catch((err) => {
+                        return res.status(404).json(err);
+                    });
+            });
+        });
+
+        await removeRehearsal;
     }
 
     Rehearsal.findByIdAndUpdate(

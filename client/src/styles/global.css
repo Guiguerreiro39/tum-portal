@@ -5,3 +5,18 @@ body {
 .k-progress .k-progress-outer {
     @apply p-0;
 }
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #ccc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}

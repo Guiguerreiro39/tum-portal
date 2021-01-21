@@ -61,7 +61,7 @@ export default {
 
 <style scoped lang="postcss">
 .header {
-    @apply flex flex-col items-center mt-4 mb-2;
+    @apply flex flex-col items-center mt-4 mb-2 row-span-1;
 }
 .arrow {
     @apply mx-6 text-2xl text-gray-600 cursor-pointer;
