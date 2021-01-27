@@ -14,6 +14,10 @@ const eventSchema = new Schema(
             type: String,
             default: null,
         },
+        eventDate: {
+            type: Date,
+            default: null,
+        }
     },
     { timestamps: true }
 );

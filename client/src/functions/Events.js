@@ -1,12 +1,13 @@
 import axios from "axios";
 
-export function createEvent(eventName,eventLocation,eventDescription) {
+export function createEvent(eventName,eventDate,eventLocation,eventDescription) {
     return new Promise((resolve, reject) => {
         axios({
             method: "post",
             url: `${process.env.VUE_APP_API}/event/`,
             data: {
                 eventName: eventName,
+                eventDate: eventDate,
                 eventLocation: eventLocation,
                 eventDescription: eventDescription,
             },

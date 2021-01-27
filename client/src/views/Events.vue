@@ -12,6 +12,15 @@
                       class="input"
                       autofocus
                   />
+                <input
+                    type="date"
+                    placeholder="Evento"
+                    autocomplete="Event-date"
+                    v-model="events.date"
+                    format="DD/MM/YYYY"
+                    class="input"
+                    autofocus
+                />
                   <input
                       type="text"
                       placeholder="Local"
@@ -46,13 +55,15 @@
     <colgroup>
       <col span="1" style="width: 15%;" />
       <col span="1" style="width: 15%;" />
-      <col span="1" style="width: 70%;" />
+      <col span="1" style="width: 15%;" />
+      <col span="1" style="width: 55%;" />
     </colgroup>
     <thead class="table-fixed table">
     <tr class="w-full pr-2">
       <th class="event pl-4" style="width: 15%;">Evento</th>
+      <th class="date pr-4" style="width: 15%;">Data</th>
       <th class="location pr-4" style="width: 15%;">Local</th>
-      <th class="description pr-4" style="width: 70%;">Descrição</th>
+      <th class="description pr-4" style="width: 55%;">Descrição</th>
     </tr>
     </thead>
     <tbody class="overflow-scroll ml-2">
@@ -64,10 +75,13 @@
       <td class="name" style="width: 15%;">
         {{ event.eventName}}
       </td>
+      <td class="date" style="width: 15%;">
+        {{ event.eventDate}}
+      </td>
       <td class="rehearsal" style="width: 15%;">
         {{ event.eventLocation }}
       </td>
-      <td class="event" style="width: 70%;">
+      <td class="event" style="width: 55%;">
         {{ event.eventDescription }}
       </td>
     </tr>
@@ -96,7 +110,7 @@ export default {
       if (
           this.events.eventName.length > 0
       ) {
-        createEvent(this.events.eventName, this.events.eventLocation, this.events.eventDescription)
+        createEvent(this.events.eventName, this.events.date, this.events.eventLocation, this.events.eventDescription)
             .catch((err) => {
               console.log(err);
             });
@@ -132,5 +146,11 @@ tbody {
 }
 .extras {
   @apply bg-white row-span-1 rounded-lg shadow-md px-5 py-4;
+}
+.rehearsal,
+.event,
+.name,
+.date {
+  @apply text-center;
 }
 </style>

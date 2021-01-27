@@ -7,6 +7,7 @@ const Event = require("../models/event_schema");
 
 const createEvent = async (req, res) => {
     const eventName = req.body.eventName;
+    const eventDate = req.body.eventDate;
     const eventLocation = req.body.eventLocation;
     const eventDescription = req.body.eventDescription;
 
@@ -16,8 +17,9 @@ const createEvent = async (req, res) => {
     } else {
         Event.create({
             eventName: eventName,
+            eventDate: eventDate,
             eventLocation: eventLocation,
-            eventDescription: eventDescription
+            eventDescription: eventDescription,
         })
             .then((data) => {
                 console.log("New Event Created!", data);
