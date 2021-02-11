@@ -50,7 +50,7 @@ export default {
         }),
         profileImageURL: function() {
             this.now = Date.now();
-            return `${process.env.VUE_APP_API}/${this.profileImage}?rnd=${this.now}`;
+            return `${this.profileImage}?rnd=${this.now}`;
         },
     },
 };
@@ -76,6 +76,6 @@ export default {
     @apply bg-gray-400 text-gray-800;
 }
 .dropdown {
-    @apply w-48 mt-2 py-2 absolute right-0 bg-white rounded-lg shadow-md overflow-hidden;
+    @apply w-48 mt-2 py-2 absolute right-0 bg-white rounded-lg shadow-md;
 }
 </style>

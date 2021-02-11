@@ -15,12 +15,7 @@
                 <Card @vote="openModalVote(index)" :vote="vote" />
             </div>
         </div>
-        <button
-            v-if="isOpen"
-            @click="closeModals"
-            tabindex="-1"
-            class="modal-bg"
-        ></button>
+        <ModalBackground v-if="isOpen" @closeModal="closeModals()" />
         <New v-if="isNewOpen" @closeModal="closeModals()" @newVote="newVote" />
         <Voting
             v-if="isVoteOpen"
@@ -37,6 +32,7 @@ import Card from "../components/Vote/Card.vue";
 import New from "../components/Vote/New.vue";
 import Voting from "../components/Vote/Voting.vue";
 import Pagination from "../components/Pagination.vue";
+import ModalBackground from "../components/ModalBackground.vue";
 
 import { getAllVotes } from "../functions/Vote";
 
@@ -46,6 +42,7 @@ export default {
         New,
         Voting,
         Pagination,
+        ModalBackground,
     },
     data() {
         return {
@@ -83,7 +80,7 @@ export default {
                 }
             });
         },
-        async newVote(data) {
+        async newVote() {
             await this.requestVotes(1);
         },
         async handlePageChange(page) {
@@ -126,11 +123,5 @@ export default {
 }
 .btn-new div {
     @apply rounded-full w-12 h-12 flex items-center justify-center bg-red-500 text-white text-xl shadow;
-}
-.modal-bg {
-    @apply fixed inset-0 h-full w-full cursor-default bg-gray-500 bg-opacity-30;
-}
-.modal-bg:focus {
-    @apply outline-none;
 }
 </style>

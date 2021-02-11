@@ -1,0 +1,20 @@
+module.exports = {
+    instruments: [
+        "guitarra",
+        "cavaquinho",
+        "bandolim",
+        "braguesa",
+        "estandarte",
+        "pandeireta",
+        "percussão",
+        "trompete",
+        "clarinete",
+        "violino",
+        "flauta",
+        "saxofone",
+        "contrabaixo",
+        "acordeão",
+        null,
+    ],
+    voices: ["alto", "médios-alto", "médio-baixo", "baixo", null],
+};

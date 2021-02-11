@@ -1,10 +1,11 @@
 const express = require("express");
-const upload = require("../middleware/upload_middleware");
+const { uploadImage, uploadVideo } = require("../middleware/upload_middleware");
 const auth = require("../middleware/auth_middleware");
 
 const {
     createUser,
     getUser,
+    getUserByID,
     getAllUsers,
     updateUser,
     deleteUser,
@@ -36,13 +37,25 @@ const {
     getAllVotes,
 } = require("../controllers/vote_controller");
 
+const {
+    createGuide,
+    getAllGuides,
+} = require("../controllers/guide_controller");
+
 const router = express.Router();
 
 router
     .post("/user/", createUser)
     .get("/user/", getUser)
+    .get("/user/:id", auth.isAuthenticated, getUserByID)
     .get("/users/", auth.isAuthenticated, getAllUsers)
-    .put("/user/:id", auth.isAuthenticated, auth.isPrivate, upload, updateUser)
+    .put(
+        "/user/:id",
+        auth.isAuthenticated,
+        auth.isPrivate,
+        uploadImage,
+        updateUser
+    )
     .delete("/user/:id", auth.isAuthenticated, auth.isPrivate, deleteUser)
     .post("/login/", login)
     .get("/logout/", auth.isAuthenticated, logout);
@@ -67,5 +80,9 @@ router
     .get("/vote/:id", auth.isAuthenticated, getVote)
     .put("/vote/:id", auth.isAuthenticated, updateVote)
     .delete("/vote/:id", auth.isAuthenticated, deleteVote);
+
+router
+    .post("/guide/", auth.isAuthenticated, uploadVideo, createGuide)
+    .get("/guide/:instrument", auth.isAuthenticated, getAllGuides);
 
 module.exports = router;

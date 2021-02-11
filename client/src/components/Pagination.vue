@@ -1,7 +1,9 @@
 <template>
-    <div class="flex justify-center mt-8">
+    <div
+        class="absolute left-56 right-0 bottom-5 mx-auto flex justify-center mt-8"
+    >
         <ul
-            class="flex bg-red-600 text-white rounded-lg divide-solid divide-x-2 overflow-hidden"
+            class="flex bg-white rounded-lg divide-solid divide-x-2 overflow-hidden shadow-md"
             v-if="pager.pages.length > 1"
         >
             <li class="page-item" @click="handleClick(currentPage - 1)">
@@ -98,10 +100,10 @@ export default {
     @apply py-1 px-4 font-semibold shadow-md cursor-pointer select-none;
 }
 .page-item:hover:not(.disabled):not(.selected) {
-    @apply bg-gray-800 bg-opacity-25;
+    @apply bg-gray-100;
 }
 .page-item.selected {
-    @apply bg-gray-700;
+    @apply bg-red-500 text-white;
 }
 .page-item.disabled {
     @apply cursor-not-allowed;

@@ -5,18 +5,18 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const path = require("path");
 
 // parse env variables
 require("dotenv").config();
 
+// MongoDB
 require("./helpers/db/mongodb.js")();
 
 // Configuring port
 const port = process.env.PORT || 9000;
 
 const app = express();
-
-app.use("/api/uploads", express.static("uploads"));
 
 // Configure middlewares
 app.use(
@@ -52,6 +52,10 @@ app.use(express.static(__dirname + "/views/"));
 
 // Defining route middleware
 app.use("/api", require("./routes/api"));
+
+// Import storage
+const { storage } = require(path.join(__dirname, "./storage/storage"));
+app.set("storage", storage);
 
 // Listening to port
 app.listen(port);

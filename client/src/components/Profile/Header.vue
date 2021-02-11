@@ -2,8 +2,9 @@
     <div class="header">
         <div
             class="image"
-            @mouseover="showIcon = true"
-            @mouseout="showIcon = false"
+            :class="{ editable: isOwner }"
+            @mouseover="isOwner ? (showIcon = true) : ''"
+            @mouseout="isOwner ? (showIcon = false) : ''"
             @click="triggerUpload"
         >
             <img
@@ -12,12 +13,19 @@
                 :src="profileImageURL"
                 alt="Profile Image"
             />
-            <input type="file" ref="fileInput" v-on:change="uploadImage" />
-            <font-awesome-icon
-                :icon="['fas', 'camera-retro']"
-                class="camera-icon"
-                v-show="showIcon"
+            <input
+                type="file"
+                ref="fileInput"
+                @change="uploadImage"
+                v-if="isOwner"
             />
+            <div v-if="isOwner">
+                <font-awesome-icon
+                    :icon="['fas', 'camera-retro']"
+                    class="camera-icon"
+                    v-show="showIcon"
+                />
+            </div>
         </div>
         <div class="header-text">
             <h2 class="username">{{ username }}</h2>
@@ -27,7 +35,11 @@
                     <h3 class="options">Naipe</h3>
                 </div>
                 <div class="col-span-1">
-                    <select v-if="isEdit" v-model="instrument" class="options">
+                    <select
+                        v-if="isEdit && isOwner"
+                        v-model="instrument"
+                        class="options"
+                    >
                         <option :value="null" class="capitalize"
                             >não definido</option
                         >
@@ -42,7 +54,11 @@
                     <h3 v-else class="options">
                         {{ instrument !== null ? instrument : "Não definido" }}
                     </h3>
-                    <select v-if="isEdit" v-model="voice" class="options">
+                    <select
+                        v-if="isEdit && isOwner"
+                        v-model="voice"
+                        class="options"
+                    >
                         <option :value="null" class="capitalize"
                             >não definido</option
                         >
@@ -62,12 +78,16 @@
                     <button
                         class="save btn"
                         @click="submitChange"
-                        v-if="isEdit"
+                        v-if="isEdit && isOwner"
                     >
                         <font-awesome-icon :icon="['fas', 'save']" />
                         <p class="ml-1 inline-block">Guardar</p>
                     </button>
-                    <button class="edit btn" @click="isEdit = true" v-else>
+                    <button
+                        class="edit btn"
+                        @click="isEdit = true"
+                        v-if="!isEdit && isOwner"
+                    >
                         <font-awesome-icon :icon="['fas', 'edit']" />
                         <p class="ml-1 inline-block">Editar</p>
                     </button>
@@ -81,6 +101,7 @@
 import { mapGetters } from "vuex";
 import { instrumentType, voiceType } from "../../constants/types.js";
 export default {
+    props: ["user", "isOwner"],
     data() {
         return {
             showIcon: false,
@@ -88,21 +109,19 @@ export default {
             now: Date.now(),
             voice: "",
             instrument: "",
+            profileImage: null,
+            username: "",
         };
     },
     created() {
-        this.voice = this.getVoice;
-        this.instrument = this.getInstrument;
+        this.voice = this.user.voice;
+        this.instrument = this.user.instrument;
+        this.username = this.user.username;
+        this.profileImage = this.user.profileImage;
     },
     computed: {
-        ...mapGetters({
-            profileImage: "getProfileImage",
-            username: "getUsername",
-            getInstrument: "getInstrument",
-            getVoice: "getVoice",
-        }),
         profileImageURL: function() {
-            return `${process.env.VUE_APP_API}/${this.profileImage}?rnd=${this.now}`;
+            return `${this.profileImage}?rnd=${this.now}`;
         },
         instrumentOptions: function() {
             return instrumentType;
@@ -113,15 +132,18 @@ export default {
     },
     methods: {
         triggerUpload() {
-            this.$refs.fileInput.click();
+            if (this.isOwner) {
+                this.$refs.fileInput.click();
+            }
         },
         uploadImage() {
             const file = this.$refs.fileInput.files[0];
 
-            if (file !== undefined) {
+            if (file !== undefined && this.isOwner) {
                 this.$store
                     .dispatch("fileUpload", file)
                     .then((res) => {
+                        this.profileImage = res;
                         this.now = Date.now();
                     })
                     .catch((err) => {
@@ -131,14 +153,16 @@ export default {
         },
         submitChange() {
             this.isEdit = false;
-            this.$store
-                .dispatch("updateUser", {
-                    instrument: this.instrument,
-                    voice: this.voice,
-                })
-                .catch((err) => {
-                    console.log("Something went wrong");
-                });
+            if (this.isOwner) {
+                this.$store
+                    .dispatch("updateUser", {
+                        instrument: this.instrument,
+                        voice: this.voice,
+                    })
+                    .catch((err) => {
+                        console.log("Something went wrong");
+                    });
+            }
         },
     },
 };
@@ -181,14 +205,14 @@ select.options:focus {
 .image {
     @apply h-48 w-48 rounded-full overflow-hidden ml-5 relative shadow-md;
 }
-.image:hover {
+.image.editable:hover {
     @apply bg-gray-500 cursor-pointer;
 }
 .profile-image {
     @apply w-full h-full object-cover;
 }
 .camera-icon {
-    @apply absolute text-4xl text-gray-800 text-opacity-80 align-middle inset-x-0 top-20 mx-auto;
+    @apply absolute text-4xl text-gray-200 text-opacity-30 align-middle inset-x-0 top-20 mx-auto;
 }
 .header-text {
     @apply w-2/3 flex flex-col ml-8 divide-y divide-solid;

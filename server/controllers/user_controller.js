@@ -1,6 +1,8 @@
 "use strict";
 
-const { userExists } = require("../functions/user_functions");
+const { format } = require("util");
+
+const { userExists, minBuffer } = require("../functions/user_functions");
 const userInfo = require("../constants/userInfo");
 
 const User = require("../models/user_schema");
@@ -43,6 +45,20 @@ const getUser = (req, res) => {
     res.send({ user: req.user });
 };
 
+const getUserByID = (req, res) => {
+    User.findById(req.params.id)
+        .then((data) => {
+            res.status(201).json({
+                isOwner: data.id == req.user.id,
+                user: userInfo(data),
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+};
+
 const getAllUsers = (req, res) => {
     User.find({})
         .then((data) => {
@@ -60,13 +76,51 @@ const getAllUsers = (req, res) => {
         });
 };
 
-const updateUser = (req, res) => {
+const updateUser = async (req, res) => {
     let user;
+
     if (req.file) {
-        user = {
-            ...req.body,
-            profileImage: req.file.path,
-        };
+        const bucket = req.app
+            .get("storage")
+            .bucket(process.env.GOOGLE_CLOUD_BUCKET);
+
+        const blob = bucket.file(
+            `${process.env.GOOGLE_CLOUD_PROFILE_IMAGE_FOLDER}/${req.params.id}.jpg`
+        );
+
+        const buffer = await minBuffer(req.file.buffer);
+
+        const promise = new Promise((resolve, reject) => {
+            const blobStream = blob.createWriteStream({
+                resumable: false,
+            });
+
+            blobStream
+                .on("error", (err) => {
+                    console.log(err);
+                    reject("Unable to upload image to storage");
+                })
+                .on("finish", async () => {
+                    const publicUrl = format(
+                        `${process.env.STORAGE_URL}/${bucket.name}/${blob.name}`
+                    );
+                    resolve(publicUrl);
+                })
+                .end(buffer);
+        });
+
+        await promise
+            .then((profileImage) => {
+                user = {
+                    ...req.body,
+                    profileImage,
+                };
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err);
+                return;
+            });
     } else {
         user = req.body;
     }
@@ -137,6 +191,7 @@ const logout = (req, res) => {
 module.exports = {
     createUser,
     getUser,
+    getUserByID,
     getAllUsers,
     updateUser,
     deleteUser,

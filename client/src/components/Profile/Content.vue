@@ -3,11 +3,19 @@
         <div class="card">
             <div class="head">
                 <h2 class="card-title">Sobre</h2>
-                <button class="save btn" @click="submitChange" v-if="isEdit">
+                <button
+                    class="save btn"
+                    @click="submitChange"
+                    v-if="isEdit && isOwner"
+                >
                     <font-awesome-icon :icon="['fas', 'save']" />
                     <p class="ml-1 inline-block">Guardar</p>
                 </button>
-                <button class="edit btn" @click="isEdit = true" v-else>
+                <button
+                    class="edit btn"
+                    @click="isEdit = true"
+                    v-if="!isEdit && isOwner"
+                >
                     <font-awesome-icon :icon="['fas', 'edit']" />
                     <p class="ml-1 inline-block">Editar</p>
                 </button>
@@ -23,7 +31,7 @@
                     <h3 class="options">{{ fullName }}</h3>
                     <input
                         type="text"
-                        v-if="isEdit"
+                        v-if="isEdit && isOwner"
                         autofocus
                         v-model="contact"
                         class="options"
@@ -33,14 +41,14 @@
                     </h3>
                     <input
                         type="email"
-                        v-if="isEdit"
+                        v-if="isEdit && isOwner"
                         v-model="email"
                         class="options"
                     />
                     <h3 v-else class="options">{{ email }}</h3>
                     <input
                         type="text"
-                        v-if="isEdit"
+                        v-if="isEdit && isOwner"
                         v-model="residence"
                         class="options"
                     />
@@ -61,28 +69,21 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+    props: ["user", "isOwner"],
     data() {
         return {
             isEdit: false,
             contact: "",
             email: "",
             residence: "",
+            fullName: "",
         };
     },
     created() {
-        this.contact = this.getContact;
-        this.email = this.getEmail;
-        this.residence = this.getResidence;
-    },
-    computed: {
-        ...mapGetters({
-            getContact: "getContact",
-            getEmail: "getEmail",
-            getResidence: "getResidence",
-        }),
-        fullName: function() {
-            return this.$store.getters.getFullName;
-        },
+        this.contact = this.user.contact;
+        this.email = this.user.email;
+        this.residence = this.user.residence;
+        this.fullName = this.user.fullName;
     },
     methods: {
         submitChange() {

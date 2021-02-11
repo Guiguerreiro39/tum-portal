@@ -127,7 +127,7 @@ const store = new Vuex.Store({
         fileUpload({ commit }, file) {
             return new Promise((resolve, reject) => {
                 let formData = new FormData();
-                formData.append("profileImage", file);
+                formData.append("image", file);
 
                 axios({
                     method: "put",
@@ -157,6 +157,21 @@ const store = new Vuex.Store({
                     .then((res) => {
                         commit("update_user", res.data.user);
                         resolve(res.data.user);
+                    })
+                    .catch((err) => {
+                        reject(err);
+                    });
+            });
+        },
+        getUser(_, id) {
+            return new Promise((resolve, reject) => {
+                axios({
+                    method: "get",
+                    url: `${process.env.VUE_APP_API}/user/${id}`,
+                    withCredentials: true,
+                })
+                    .then((res) => {
+                        resolve(res.data);
                     })
                     .catch((err) => {
                         reject(err);

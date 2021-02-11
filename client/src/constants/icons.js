@@ -19,8 +19,10 @@ import {
     faPlus,
     faTimes,
     faMedal,
+    faVideo,
+    faCloudUploadAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { faBell, faPlayCircle } from "@fortawesome/free-regular-svg-icons";
 
 library.add(faFacebook);
 library.add(faInstagram);
@@ -40,5 +42,8 @@ library.add(faVoteYea);
 library.add(faPlus);
 library.add(faTimes);
 library.add(faMedal);
+library.add(faVideo);
+library.add(faCloudUploadAlt);
 
 library.add(faBell);
+library.add(faPlayCircle);

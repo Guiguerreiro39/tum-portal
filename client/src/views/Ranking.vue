@@ -22,7 +22,7 @@
                             Ensaios
                         </th>
                         <th class="event pr-4" style="width: 10%;">Eventos</th>
-                        <th class="total pr-4" style="width: 10%;">Total</th>
+                        <th class="total pr-4" style="width: 10%;">Pontos</th>
                     </tr>
                 </thead>
                 <tbody class="overflow-scroll ml-2">
@@ -44,14 +44,14 @@
                             ></font-awesome-icon>
                         </td>
                         <td class="name" style="width: 60%;">
-                            <div class="">
+                            <router-link :to="'/profile/' + user.id">
                                 <img
-                                    :src="profileImageURL(user.profileImage)"
+                                    :src="profileImageURL(user)"
                                     alt="User Profile Image"
                                     class="user-image"
                                 />
                                 <p class="username">{{ user.username }}</p>
-                            </div>
+                            </router-link>
                         </td>
                         <td class="rehearsal" style="width: 10%;">
                             {{ user.rehearsals }}
@@ -95,8 +95,8 @@ export default {
         calculatePoints(rehearsals, events) {
             return rehearsals * rehearsalPoints + events * eventPoints;
         },
-        profileImageURL(url) {
-            return `${process.env.VUE_APP_API}/${url}`;
+        profileImageURL(user) {
+            return `${user.profileImage}?rnd=${Date.now()}`;
         },
     },
     created() {
@@ -114,7 +114,7 @@ td {
     @apply py-2;
 }
 th {
-    @apply text-white bg-red-600;
+    @apply text-white bg-red-500;
 }
 tbody {
     @apply divide-solid divide-y;

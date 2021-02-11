@@ -2,8 +2,8 @@
     <div class="home">
         <Navbar />
         <Sidebar />
-        <div class="w-full pt-20 pl-56 h-full ">
-            <router-view />
+        <div class="w-full pt-20 pl-56 h-full">
+            <router-view :key="$route.path" />
         </div>
     </div>
 </template>

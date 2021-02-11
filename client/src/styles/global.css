@@ -1,5 +1,5 @@
 body {
-    @apply text-gray-800 h-screen w-screen;
+    @apply text-gray-700 h-screen w-screen;
 }
 
 .k-progress .k-progress-outer {

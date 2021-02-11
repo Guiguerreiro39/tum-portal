@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const { instruments, voices } = require("../constants/basicInfo");
 
 const userSchema = new Schema(
     {
@@ -19,7 +20,7 @@ const userSchema = new Schema(
         },
         voice: {
             type: String,
-            enum: ["alto", "médios-alto", "médio-baixo", "baixo", null],
+            enum: voices,
             default: null,
         },
         contact: {
@@ -32,28 +33,12 @@ const userSchema = new Schema(
         },
         instrument: {
             type: String,
-            enum: [
-                "guitarra",
-                "cavaquinho",
-                "bandolim",
-                "braguesa",
-                "estandarte",
-                "pandeireta",
-                "percussão",
-                "trompete",
-                "clarinete",
-                "violino",
-                "flauta",
-                "saxofone",
-                "contrabaixo",
-                "acordeão",
-                null,
-            ],
+            enum: instruments,
             default: null,
         },
         profileImage: {
             type: String,
-            default: "uploads/default.jpg",
+            default: `${process.env.STORAGE_URL}/${process.env.GOOGLE_CLOUD_BUCKET}/${process.env.GOOGLE_CLOUD_PROFILE_IMAGE_FOLDER}/default.jpg`,
         },
         rehearsals: {
             type: Number,

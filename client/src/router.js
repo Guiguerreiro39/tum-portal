@@ -13,6 +13,7 @@ import Rehearsals from "./views/Rehearsals.vue";
 import Events from "./views/Events.vue";
 import Vote from "./views/Vote.vue";
 import Ranking from "./views/Ranking.vue";
+import Guide from "./views/Guide.vue";
 
 Vue.use(Router);
 
@@ -64,6 +65,14 @@ const router = new Router({
             },
         },
         {
+            path: "/guide",
+            name: "guide",
+            component: Guide,
+            meta: {
+                requiresAuth: true,
+            },
+        },
+        {
             path: "/events",
             name: "events",
             component: Events,
@@ -87,7 +96,14 @@ const router = new Router({
                 requiresAuth: true,
             },
         },
-
+        {
+            path: "/profile/:id",
+            name: "user",
+            component: Profile,
+            meta: {
+                requiresAuth: true,
+            },
+        },
         {
             path: "/login",
             name: "login",

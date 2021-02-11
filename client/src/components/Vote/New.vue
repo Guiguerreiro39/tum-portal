@@ -102,7 +102,7 @@ export default {
             ) {
                 createVote(this.question, this.options, this.dateTime)
                     .then((data) => {
-                        this.$emit("newVote", data);
+                        this.$emit("newVote");
                         this.$emit("closeModal");
                     })
                     .catch((err) => {
@@ -140,7 +140,7 @@ export default {
     @apply shadow-outline;
 }
 .btn-exit {
-    @apply ml-4 text-gray-300 float-right text-2xl;
+    @apply text-gray-300 text-2xl absolute right-4 top-2;
 }
 .btn-exit:focus {
     @apply outline-none;

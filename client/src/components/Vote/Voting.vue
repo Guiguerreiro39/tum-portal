@@ -106,7 +106,7 @@ export default {
     @apply bg-white w-1/2 absolute inset-x-0 top-20 mx-auto px-4 pb-3 pt-2 divide-solid divide-y rounded-lg shadow-md;
 }
 .btn-exit {
-    @apply ml-4 text-gray-300 float-right text-2xl;
+    @apply text-gray-300 text-2xl absolute right-4 top-2;
 }
 .btn-exit:focus {
     @apply outline-none;

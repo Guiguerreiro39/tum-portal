@@ -1,25 +1,23 @@
 const { Schema, model } = require("mongoose");
+const { instruments } = require("../constants/basicInfo");
 
-const eventSchema = new Schema(
+const guideSchema = new Schema(
     {
-        eventName: {
+        name: {
             type: String,
             required: [true, "name field is required"],
         },
-        eventLocation: {
+        instrument: {
             type: String,
+            enum: instruments,
             default: null,
         },
-        eventDescription: {
+        video: {
             type: String,
-            default: null,
-        },
-        eventDate: {
-            type: Date,
-            default: null,
+            required: [true, "video url is required"],
         },
     },
     { timestamps: true }
 );
 
-module.exports = model("Event", eventSchema);
+module.exports = model("Guide", guideSchema);

@@ -1,5 +1,5 @@
 <template>
-    <div class="py-4 overflow-auto">
+    <div class="my-4 overflow-auto">
         <div
             v-for="(user, index) in users"
             :key="index"
@@ -13,7 +13,7 @@
             @click="toggleUser(index)"
         >
             <img
-                :src="profileImageURL(user.profileImage)"
+                :src="profileImageURL(user)"
                 alt="User Profile Image"
                 class="user-image"
             />
@@ -39,9 +39,6 @@ export default {
         },
     },
     methods: {
-        profileImageURL(url) {
-            return `${process.env.VUE_APP_API}/${url}`;
-        },
         toggleUser(user) {
             const index = this.selected.indexOf(user);
             if (index !== -1) {
@@ -49,6 +46,9 @@ export default {
             } else {
                 this.selected.push(user);
             }
+        },
+        profileImageURL(user) {
+            return `${user.profileImage}?rnd=${Date.now()}`;
         },
     },
 };
