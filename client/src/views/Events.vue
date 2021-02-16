@@ -76,7 +76,7 @@
         {{ event.eventName}}
       </td>
       <td class="date" style="width: 15%;">
-        {{ event.eventDate}}
+        {{ format_date(event.eventDate)}}
       </td>
       <td class="rehearsal" style="width: 15%;">
         {{ event.eventLocation }}
@@ -97,6 +97,7 @@ import {
   createEvent
 } from "../functions/Events";
 import Table from "@/components/Rehearsals/Table";
+import moment from 'moment'
 export default {
   name: "Events.vue",
   components: { Table },
@@ -114,6 +115,11 @@ export default {
             .catch((err) => {
               console.log(err);
             });
+      }
+    },
+    format_date(data){
+      if (data) {
+        return moment(String(data)).format('DD/MM/YYYY')
       }
     },
   },
@@ -152,5 +158,6 @@ tbody {
 .name,
 .date {
   @apply text-center;
+
 }
 </style>
