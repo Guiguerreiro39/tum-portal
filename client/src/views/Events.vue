@@ -54,16 +54,18 @@
   >
     <colgroup>
       <col span="1" style="width: 15%;" />
+      <col span="1" style="width: 10%;" />
       <col span="1" style="width: 15%;" />
-      <col span="1" style="width: 15%;" />
-      <col span="1" style="width: 55%;" />
+      <col span="1" style="width: 50%;" />
+      <col span="1" style="width: 10%;" />
     </colgroup>
     <thead class="table-fixed table">
     <tr class="w-full pr-2">
       <th class="event pl-4" style="width: 15%;">Evento</th>
-      <th class="date pr-4" style="width: 15%;">Data</th>
+      <th class="date pr-4" style="width: 10%;">Data</th>
       <th class="location pr-4" style="width: 15%;">Local</th>
-      <th class="description pr-4" style="width: 55%;">Descrição</th>
+      <th class="description pr-4" style="width: 50%;">Descrição</th>
+      <th class="registration pr-4" style="width: 10%;">Inscrição</th>
     </tr>
     </thead>
     <tbody class="overflow-scroll ml-2">
@@ -75,14 +77,20 @@
       <td class="name" style="width: 15%;">
         {{ event.eventName}}
       </td>
-      <td class="date" style="width: 15%;">
+      <td class="date" style="width: 10%;">
         {{ format_date(event.eventDate)}}
       </td>
       <td class="rehearsal" style="width: 15%;">
         {{ event.eventLocation }}
       </td>
-      <td class="event" style="width: 55%;">
+      <td class="event" style="width: 50%;">
         {{ event.eventDescription }}
+      </td>
+      <td class="registration" style="width: 10%;">
+        <input type="checkbox" id="go" value="Go" v-model="optionRegistration[index]" v-on:click= "check_one(index)">
+        <label for="go"> Vou </label>
+        <input type="checkbox" id="nogo" value="Nogo" v-model="optionRegistration[index]" v-on:click= "check_one(index)">
+        <label for="nogo"> Não Vou </label>
       </td>
     </tr>
     </tbody>
@@ -104,6 +112,7 @@ export default {
   data() {
     return {
       events: [],
+      optionRegistration: [],
     };
   },
   methods: {
@@ -122,6 +131,9 @@ export default {
         return moment(String(data)).format('DD/MM/YYYY')
       }
     },
+    check_one(index){
+      this.optionRegistration[index] = [];
+    }
   },
     created() {
       this.$store.dispatch("getAllEvents").then((res) => {
@@ -156,6 +168,7 @@ tbody {
 .rehearsal,
 .event,
 .name,
+.registration,
 .date {
   @apply text-center;
 
