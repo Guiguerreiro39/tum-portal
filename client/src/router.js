@@ -14,6 +14,7 @@ import Events from "./views/Events.vue";
 import Vote from "./views/Vote.vue";
 import Ranking from "./views/Ranking.vue";
 import Guide from "./views/Guide.vue";
+import Settings from "./views/Settings.vue";
 
 Vue.use(Router);
 
@@ -100,6 +101,14 @@ const router = new Router({
             path: "/profile/:id",
             name: "user",
             component: Profile,
+            meta: {
+                requiresAuth: true,
+            },
+        },
+        {
+            path: "/settings",
+            name: "settings",
+            component: Settings,
             meta: {
                 requiresAuth: true,
             },

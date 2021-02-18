@@ -25,9 +25,11 @@
                 class="fixed inset-0 h-full w-full cursor-default focus:outline-none"
             ></button>
             <div class="dropdown" v-if="isOpen" @click="isOpen = false">
-                <span class="dropdown-item">Settings</span>
+                <router-link to="/settings" class="dropdown-item"
+                    >Definições</router-link
+                >
                 <router-link to="/profile" class="dropdown-item"
-                    >Profile</router-link
+                    >Perfil</router-link
                 >
             </div>
         </div>

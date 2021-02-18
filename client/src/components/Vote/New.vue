@@ -131,7 +131,7 @@ export default {
 
 <style scoped lang="postcss">
 .modal {
-    @apply bg-white w-1/2 absolute inset-x-0 top-20 mx-auto px-4 pb-3 pt-2 divide-solid divide-y rounded-lg shadow-md;
+    @apply bg-white w-1/2 absolute inset-x-0 top-20 mx-auto px-4 pb-3 pt-2 divide-solid divide-y rounded-lg shadow-md z-10;
 }
 .input {
     @apply w-3/4 py-2 px-2 rounded-lg outline-none border;

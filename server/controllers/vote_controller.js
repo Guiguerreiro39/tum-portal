@@ -3,11 +3,17 @@
 const Vote = require("../models/vote_schema");
 const User = require("../models/user_schema");
 
+const { sendVoteEmail } = require("../helpers/email/email");
+
 const paginate = require("jw-paginate");
 
 const createVote = (req, res) => {
     Vote.create(req.body)
         .then((data) => {
+            sendVoteEmail({
+                user: req.user.username,
+                question: data.question,
+            });
             res.status(201).json(data);
         })
         .catch((err) => {
@@ -39,7 +45,12 @@ const getAllVotes = async (req, res) => {
 
     let pager;
     if (totalItems === 0) pager = paginate(1, page, limit);
-    else pager = paginate(totalItems, page, limit);
+    else
+        pager = paginate(
+            totalItems,
+            page,
+            page === 1 && totalItems > 8 ? limit + 1 : limit
+        );
 
     Vote.find()
         .sort({ createdAt: "desc" })

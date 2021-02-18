@@ -1,5 +1,7 @@
 const Guide = require("../models/guide_schema");
 
+const { sendGuideEmail } = require("../helpers/email/email");
+
 const { format } = require("util");
 const paginate = require("jw-paginate");
 
@@ -50,6 +52,11 @@ const createGuide = async (req, res) => {
                     instrument: instrument,
                 })
                     .then((data) => {
+                        sendGuideEmail({
+                            user: req.user.username,
+                            name: data.name,
+                            instrument: data.instrument,
+                        });
                         res.status(201).json(data);
                     })
                     .catch((err) => {

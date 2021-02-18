@@ -12,7 +12,7 @@ export default {};
 
 <style scoped lang="postcss">
 .modal-bg {
-    @apply fixed inset-0 h-full w-full cursor-default bg-gray-700 bg-opacity-50;
+    @apply fixed inset-0 h-full w-full cursor-default bg-gray-700 bg-opacity-50 z-10;
 }
 .modal-bg:focus {
     @apply outline-none;

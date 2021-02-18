@@ -58,6 +58,7 @@ export default {
             pages = pages.slice(1, this.endPage - 1);
 
             if (this.pager.pages.length > 5) {
+                console.log("here");
                 if (this.currentPage === 1 || this.currentPage === 2) {
                     return [2, 3, null];
                 } else if (
@@ -83,6 +84,7 @@ export default {
                     return result;
                 }
             } else {
+                console.log(this.pager);
                 return pages;
             }
         },

@@ -103,7 +103,7 @@ export default {
 
 <style scoped lang="postcss">
 .modal {
-    @apply bg-white w-1/2 absolute inset-x-0 top-20 mx-auto px-4 pb-3 pt-2 divide-solid divide-y rounded-lg shadow-md;
+    @apply bg-white w-1/2 absolute inset-x-0 top-20 mx-auto px-4 pb-3 pt-2 divide-solid divide-y rounded-lg shadow-md z-10;
 }
 .btn-exit {
     @apply text-gray-300 text-2xl absolute right-4 top-2;

@@ -120,7 +120,7 @@ export default {
     @apply relative;
 }
 canvas {
-    @apply shadow-md h-48;
+    @apply shadow-md h-full;
 }
 .image:hover {
     @apply cursor-pointer;
