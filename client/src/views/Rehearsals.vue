@@ -21,8 +21,10 @@
                 />
             </div>
         </div>
-        <div class="extras">
-            <NewDate @newExtra="newExtra" />
+        <div class="w-full flex justify-center">
+            <div class="extras">
+                <NewDate @newExtra="newExtra" />
+            </div>
         </div>
     </div>
 </template>
@@ -189,15 +191,15 @@ export default {
 
 <style scoped lang="postcss">
 .rehearsals {
-    @apply grid grid-rows-5 items-center h-full p-10 w-2/3 mx-auto;
+    @apply grid grid-rows-5 items-center h-full p-10 pt-5 w-2/3 mx-auto;
 }
 .list {
-    @apply bg-white row-span-4 rounded-lg shadow-md divide-solid divide-y px-5 h-full overflow-hidden grid grid-rows-5;
+    @apply bg-white row-span-4 rounded-lg shadow-md divide-solid divide-y px-5 h-full overflow-hidden grid grid-rows-5 gap-5;
 }
 .tables {
     @apply grid grid-cols-2 divide-solid divide-x h-full row-span-4;
 }
 .extras {
-    @apply bg-white row-span-1 rounded-lg shadow-md px-5 py-4;
+    @apply bg-white row-span-1 rounded-lg shadow-md px-5 py-4 w-2/3;
 }
 </style>

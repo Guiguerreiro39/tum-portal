@@ -11,5 +11,6 @@ module.exports = function userInformation(data) {
         residence: data.residence,
         rehearsals: data.rehearsals,
         events: data.events,
+        configurations: data.configurations,
     };
 };

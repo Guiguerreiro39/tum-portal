@@ -9,7 +9,7 @@
                 <input
                     type="text"
                     placeholder="p.e. Quem vem ao Carpé?"
-                    class="input"
+                    class="text-input w-3/4"
                     maxlength="60"
                     v-model="question"
                 />
@@ -22,7 +22,7 @@
                     <input
                         type="text"
                         placeholder="Insira nova opção"
-                        class="input"
+                        class="text-input w-3/4"
                         v-model="newOption"
                     />
                     <button class="btn-add" @click="addOption()">
@@ -52,6 +52,7 @@
                 <DatePicker
                     v-model="dateTime"
                     type="datetime"
+                    input-class="text-input w-full"
                     placeholder="Data final da votação"
                     :default-value="new Date()"
                     :disabled-date="disabledDate"
@@ -120,10 +121,14 @@ export default {
             return date.getTime() < today.getTime();
         },
         disabledTime(date) {
-            if (date.getHours() < new Date().getHours()) return true;
-            else if (date.getHours() == new Date().getHours())
-                return date.getMinutes() < new Date().getMinutes();
-            else return false;
+            if (date.getDate() == new Date().getDate()) {
+                if (date.getHours() < new Date().getHours()) return true;
+                else if (date.getHours() == new Date().getHours())
+                    return date.getMinutes() < new Date().getMinutes();
+                else return false;
+            }
+
+            return false;
         },
     },
 };
@@ -132,12 +137,6 @@ export default {
 <style scoped lang="postcss">
 .modal {
     @apply bg-white w-1/2 absolute inset-x-0 top-20 mx-auto px-4 pb-3 pt-2 divide-solid divide-y rounded-lg shadow-md z-10;
-}
-.input {
-    @apply w-3/4 py-2 px-2 rounded-lg outline-none border;
-}
-.input:focus {
-    @apply shadow-outline;
 }
 .btn-exit {
     @apply text-gray-300 text-2xl absolute right-4 top-2;
@@ -164,7 +163,7 @@ export default {
     @apply flex flex-col justify-center items-center mb-3;
 }
 .options-box {
-    @apply py-2 px-4 border w-1/2 divide-solid divide-y rounded-lg my-3 h-48 overflow-y-auto;
+    @apply py-2 px-4 border-2 w-1/2 divide-solid divide-y rounded-lg my-3 h-48 overflow-y-auto;
 }
 .btn-remove {
     @apply ml-4 text-red-500;

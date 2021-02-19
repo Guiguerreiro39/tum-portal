@@ -173,16 +173,16 @@ export default {
     @apply bg-white w-2/3 h-60 flex items-center rounded-lg shadow-md;
 }
 .options {
-    @apply py-1 mt-2 capitalize border border-transparent rounded-lg;
+    @apply py-1 mt-2 capitalize rounded-lg;
 }
 h3.options {
-    @apply ml-1;
+    @apply ml-3 border-2 border-transparent;
 }
 select.options {
-    @apply border-gray-300;
+    @apply rounded-lg border-2 border-gray-200;
 }
 select.options:focus {
-    @apply shadow-outline outline-none;
+    @apply border-red-300 ring-1 ring-red-500 ring-opacity-30 outline-none;
 }
 .btn {
     @apply cursor-pointer h-6;

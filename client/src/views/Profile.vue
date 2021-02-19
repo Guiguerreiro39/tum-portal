@@ -41,6 +41,6 @@ export default {
 
 <style scoped lang="postcss">
 .profile {
-    @apply flex flex-col items-center h-full;
+    @apply flex flex-col items-center h-full pt-5;
 }
 </style>

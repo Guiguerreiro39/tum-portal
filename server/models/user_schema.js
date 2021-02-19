@@ -48,6 +48,22 @@ const userSchema = new Schema(
             type: Number,
             default: 0,
         },
+        configurations: {
+            email: {
+                eventCreate: {
+                    type: Boolean,
+                    default: true,
+                },
+                voteCreate: {
+                    type: Boolean,
+                    default: true,
+                },
+                guideCreate: {
+                    type: Boolean,
+                    default: true,
+                },
+            },
+        },
     },
     { timestamps: true }
 );

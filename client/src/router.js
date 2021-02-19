@@ -90,14 +90,6 @@ const router = new Router({
             },
         },
         {
-            path: "/profile/edit",
-            name: "edit",
-            component: Edit,
-            meta: {
-                requiresAuth: true,
-            },
-        },
-        {
             path: "/profile/:id",
             name: "user",
             component: Profile,

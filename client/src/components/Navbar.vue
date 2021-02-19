@@ -25,11 +25,11 @@
                 class="fixed inset-0 h-full w-full cursor-default focus:outline-none"
             ></button>
             <div class="dropdown" v-if="isOpen" @click="isOpen = false">
-                <router-link to="/settings" class="dropdown-item"
-                    >Definições</router-link
-                >
                 <router-link to="/profile" class="dropdown-item"
                     >Perfil</router-link
+                >
+                <router-link to="/settings" class="dropdown-item"
+                    >Definições</router-link
                 >
             </div>
         </div>
@@ -75,7 +75,7 @@ export default {
     @apply block px-4 py-2 cursor-pointer;
 }
 .dropdown-item:hover {
-    @apply bg-gray-400 text-gray-800;
+    @apply bg-gray-100;
 }
 .dropdown {
     @apply w-48 mt-2 py-2 absolute right-0 bg-white rounded-lg shadow-md;

@@ -32,14 +32,17 @@
                 <input
                     type="text"
                     placeholder="p.e. Boémia"
-                    class="input"
+                    class="text-input w-3/4"
                     maxlength="60"
                     v-model="name"
                 />
             </div>
             <div class="content mb-4">
                 <p class="label">Modalidade</p>
-                <select v-model="instrument" class="input capitalize">
+                <select
+                    v-model="instrument"
+                    class="text-input w-3/4 capitalize"
+                >
                     <option
                         v-for="(item, index) in instruments"
                         :key="index"
@@ -132,12 +135,6 @@ export default {
 }
 .label {
     @apply font-semibold mr-5 ml-2;
-}
-.input {
-    @apply w-3/4 py-2 px-2 rounded-lg outline-none border;
-}
-.input:focus {
-    @apply shadow-outline;
 }
 .btn-submit {
     @apply bg-green-500 py-2 px-10 mt-4 text-white font-medium rounded-lg;

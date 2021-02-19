@@ -7,7 +7,7 @@
             :class="[
                 selected.includes(index)
                     ? 'bg-red-500 text-white'
-                    : 'hover:bg-gray-200',
+                    : 'hover:bg-gray-100',
                 side === 'left' ? 'mr-10' : 'ml-10',
             ]"
             @click="toggleUser(index)"

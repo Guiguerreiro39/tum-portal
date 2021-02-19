@@ -35,6 +35,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "migrate-mongoose": "^4.0.0",
     "nodemon": "^1.18.3",
     "prettier": "^2.0.5"
   }

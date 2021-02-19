@@ -40,6 +40,7 @@ const store = new Vuex.Store({
         getResidence: (state) => state.user.residence,
         getID: (state) => state.user.id,
         getProfileImage: (state) => state.user.profileImage,
+        getConfigurations: (state) => state.user.configurations,
         isAuthenticated: (state) => state.status === "success",
         authStatus: (state) => state.status,
     },

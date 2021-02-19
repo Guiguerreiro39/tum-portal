@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full w-full p-10">
+    <div class="h-full w-full p-10 pt-5">
         <div
             class="h-full w-full bg-white shadow-md rounded-lg divide-solid divide-y overflow-hidden"
         >

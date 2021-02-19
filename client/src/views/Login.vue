@@ -9,7 +9,7 @@
                 placeholder="Username"
                 autocomplete="username"
                 v-model="username"
-                class="input"
+                class="text-input w-2/3 my-2"
                 autofocus
             />
             <input
@@ -17,7 +17,7 @@
                 placeholder="Password"
                 autocomplete="current-password"
                 v-model="password"
-                class="input"
+                class="text-input w-2/3 my-2"
             />
             <button
                 type="submit"
@@ -62,11 +62,5 @@ export default {
 <style scoped lang="postcss">
 .login {
     @apply w-full h-full flex flex-col items-center justify-center;
-}
-.input {
-    @apply w-4/5 my-2 py-2 px-2 rounded-lg outline-none;
-}
-.input:focus {
-    @apply shadow-outline;
 }
 </style>

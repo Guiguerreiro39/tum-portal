@@ -22,7 +22,11 @@ import {
     faVideo,
     faCloudUploadAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { faBell, faPlayCircle } from "@fortawesome/free-regular-svg-icons";
+import {
+    faBell,
+    faPlayCircle,
+    faEnvelope,
+} from "@fortawesome/free-regular-svg-icons";
 
 library.add(faFacebook);
 library.add(faInstagram);
@@ -47,3 +51,4 @@ library.add(faCloudUploadAlt);
 
 library.add(faBell);
 library.add(faPlayCircle);
+library.add(faEnvelope);

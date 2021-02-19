@@ -21,7 +21,7 @@
                     v-model="picked"
                     name="option"
                     :value="option._id"
-                    hidden
+                    class="hidden"
                 />
                 <span class="radio" @click="picked = option._id"></span>
                 <div class="w-full">
