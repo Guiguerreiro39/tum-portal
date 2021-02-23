@@ -84,7 +84,6 @@ export default {
                     return result;
                 }
             } else {
-                console.log(this.pager);
                 return pages;
             }
         },

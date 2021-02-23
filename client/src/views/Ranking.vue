@@ -1,7 +1,8 @@
 <template>
-    <div class="h-full w-full p-10 pt-5">
+    <div class="h-full w-full p-10 pt-5 flex items-center justify-center">
         <div
             class="h-full w-full bg-white shadow-md rounded-lg divide-solid divide-y overflow-hidden"
+            v-if="isMounted"
         >
             <table
                 class="w-full h-full flex flex-col rounded-lg"
@@ -66,6 +67,7 @@
                 </tbody>
             </table>
         </div>
+        <RotateLoader v-else color="rgba(239, 68, 68, 1)" size="2rem" />
     </div>
 </template>
 
@@ -73,8 +75,11 @@
 import Table from "../components/Rehearsals/Table.vue";
 
 import { rehearsalPoints, eventPoints } from "../constants/rank";
+
+import RotateLoader from "vue-spinner/src/PulseLoader.vue";
+
 export default {
-    components: { Table },
+    components: { Table, RotateLoader },
     data() {
         return {
             users: [],

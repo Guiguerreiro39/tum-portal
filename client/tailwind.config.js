@@ -14,6 +14,9 @@ module.exports = {
             height: (theme) => ({
                 "90": "89.5%",
             }),
+            maxHeight: (theme) => ({
+                "3/4": "75%",
+            }),
         },
     },
     variants: {},

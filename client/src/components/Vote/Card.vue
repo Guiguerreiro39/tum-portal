@@ -9,7 +9,10 @@
                     <p class="font-medium break-all">
                         {{ option.text }}
                     </p>
-                    <p class="whitespace-nowrap ml-2">
+                    <p
+                        class="whitespace-nowrap ml-2 cursor-pointer"
+                        @click="$emit('users', option.users)"
+                    >
                         {{ option.users.length }} votos
                     </p>
                 </div>
@@ -29,9 +32,13 @@
             >
                 Votar
             </button>
-            <span class="btn-pending" v-if="hasVoted && !isFinished">
-                Pendente
-            </span>
+            <button
+                class="btn-pending"
+                v-if="hasVoted && !isFinished"
+                @click="$emit('vote')"
+            >
+                Alterar
+            </button>
             <span class="btn-finish" v-if="isFinished">
                 Terminado
             </span>
@@ -113,7 +120,13 @@ export default {
     @apply bg-green-600;
 }
 .btn-pending {
-    @apply bg-yellow-500 px-2 py-1 rounded-lg text-white font-medium select-none;
+    @apply bg-yellow-500 px-2 py-1 rounded-lg text-white font-medium;
+}
+.btn-pending:hover {
+    @apply bg-yellow-600;
+}
+.btn-pending:focus {
+    @apply outline-none;
 }
 .btn-finish {
     @apply bg-red-500 px-2 py-1 rounded-lg text-white font-medium select-none;

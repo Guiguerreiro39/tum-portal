@@ -1,5 +1,5 @@
 <template>
-    <div class="px-10 pt-5 h-full w-full">
+    <div class="px-10 pt-5 h-full w-full relative">
         <div class="flex w-full overflow-hidden ">
             <div class="mr-5">
                 <button class="btn-add" @click="isNewOpen = true">
@@ -18,22 +18,31 @@
                 </button>
             </div>
         </div>
-        <div
-            class="grid grid-cols-3 grid-rows-2 gap-x-4 gap-y-5 items-center justify-center mt-5"
-        >
-            <Video
-                :options="videoOptions(guide.video)"
-                class="row-span-1"
-                v-for="(guide, index) in guides"
-                :key="index"
-                :name="guide.name"
-            />
-            <p
-                class="font-bold text-xl row-span-2 col-span-3 text-center mt-20 text-gray-400"
-                v-if="guides.length === 0"
+        <div>
+            <div
+                class="grid grid-cols-3 grid-rows-2 gap-x-4 gap-y-5 items-center justify-center mt-5 w-full h-full"
+                v-if="isMounted"
             >
-                Não existem vídeos ainda!
-            </p>
+                <Video
+                    :options="videoOptions(guide.video)"
+                    class="row-span-1"
+                    v-for="(guide, index) in guides"
+                    :key="index"
+                    :name="guide.name"
+                />
+                <p
+                    class="font-bold text-xl row-span-2 col-span-3 text-center mt-20 text-gray-400"
+                    v-if="guides.length === 0"
+                >
+                    Não existem vídeos ainda!
+                </p>
+            </div>
+            <RotateLoader
+                v-else
+                color="rgba(239, 68, 68, 1)"
+                size="2rem"
+                class="absolute right-1/2 top-1/2"
+            />
         </div>
         <ModalBackground @closeModal="isNewOpen = false" v-if="isNewOpen" />
         <New
@@ -59,17 +68,21 @@ import Pagination from "../components/Pagination";
 import { instrumentType } from "../constants/types";
 import { getAllGuides } from "../functions/Guide";
 
+import RotateLoader from "vue-spinner/src/PulseLoader.vue";
+
 export default {
     components: {
         New,
         Video,
         ModalBackground,
         Pagination,
+        RotateLoader,
     },
     data() {
         return {
             selectedInstrument: 0,
             isNewOpen: false,
+            isMounted: false,
             pager: null,
             guides: [],
         };
@@ -99,6 +112,7 @@ export default {
         async handleInstrumentChange(index) {
             this.selectedInstrument = index;
             this.pager = null;
+            this.isMounted = false;
             await this.requestGuides(1);
         },
         async newGuide(index) {
@@ -106,6 +120,7 @@ export default {
             await this.requestGuides(1);
         },
         async handlePageChange(page) {
+            this.isMounted = false;
             await this.requestGuides(page);
         },
         requestGuides(page) {
@@ -116,6 +131,7 @@ export default {
                 .then((res) => {
                     this.pager = res.pager;
                     this.guides = res.data;
+                    this.isMounted = true;
                 })
                 .catch((err) => {
                     console.log(err);

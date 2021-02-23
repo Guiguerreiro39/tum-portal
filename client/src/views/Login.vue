@@ -30,8 +30,6 @@
 </template>
 
 <script>
-import router from "@/router.js";
-import "es6-promise/auto";
 export default {
     data() {
         return {

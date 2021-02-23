@@ -70,7 +70,6 @@ const getAllVotes = async (req, res) => {
 
 const updateVote = async (req, res) => {
     var options = [];
-    var duplicated = false;
     var now = new Date();
 
     var mapToOptions = new Promise((resolve, reject) => {
@@ -80,16 +79,22 @@ const updateVote = async (req, res) => {
                     .then((u) => {
                         if (new Date(data.date) >= now) {
                             options = data.options.map((option) => {
+                                var duplicated = false;
                                 option.users.forEach((user) => {
                                     if (user._id == u.id) duplicated = true;
                                 });
 
                                 if (option.id === req.body.vote) {
                                     if (!duplicated) option.users.push(u);
-                                    return option;
                                 } else {
-                                    return option;
+                                    if (duplicated)
+                                        option.users = option.users.filter(
+                                            (user) => {
+                                                return u.id != user._id;
+                                            }
+                                        );
                                 }
+                                return option;
                             });
                         }
                         resolve();

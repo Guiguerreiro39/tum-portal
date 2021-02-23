@@ -1,31 +1,34 @@
 <template>
-    <div class="rehearsals" v-if="isMounted">
-        <div class="list">
-            <Header
-                :time="time"
-                :extras="allExtra"
-                @timeChange="timeChange"
-                @addPresence="addPresence"
-                @removePresence="removePresence"
-            />
-            <div class="tables">
-                <Table
-                    :users="leftUsers"
-                    :selectedUsers="leftSelected"
-                    side="left"
+    <div class="h-full w-full flex items-center justify-center">
+        <div class="rehearsals" v-if="isMounted">
+            <div class="list">
+                <Header
+                    :time="time"
+                    :extras="allExtra"
+                    @timeChange="timeChange"
+                    @addPresence="addPresence"
+                    @removePresence="removePresence"
                 />
-                <Table
-                    :users="rightUsers"
-                    :selectedUsers="rightSelected"
-                    side="right"
-                />
+                <div class="tables">
+                    <Table
+                        :users="leftUsers"
+                        :selectedUsers="leftSelected"
+                        side="left"
+                    />
+                    <Table
+                        :users="rightUsers"
+                        :selectedUsers="rightSelected"
+                        side="right"
+                    />
+                </div>
+            </div>
+            <div class="w-full flex justify-center">
+                <div class="extras">
+                    <NewDate @newExtra="newExtra" />
+                </div>
             </div>
         </div>
-        <div class="w-full flex justify-center">
-            <div class="extras">
-                <NewDate @newExtra="newExtra" />
-            </div>
-        </div>
+        <RotateLoader v-else color="rgba(239, 68, 68, 1)" size="2rem" />
     </div>
 </template>
 
@@ -39,11 +42,15 @@ import {
     updateRehearsal,
     createRehearsal,
 } from "../functions/Rehearsals.js";
+
+import RotateLoader from "vue-spinner/src/PulseLoader.vue";
+
 export default {
     components: {
         Table,
         Header,
         NewDate,
+        RotateLoader,
     },
     data() {
         return {

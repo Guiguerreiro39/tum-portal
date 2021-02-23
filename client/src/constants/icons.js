@@ -26,6 +26,7 @@ import {
     faBell,
     faPlayCircle,
     faEnvelope,
+    faEye,
 } from "@fortawesome/free-regular-svg-icons";
 
 library.add(faFacebook);
@@ -52,3 +53,4 @@ library.add(faCloudUploadAlt);
 library.add(faBell);
 library.add(faPlayCircle);
 library.add(faEnvelope);
+library.add(faEye);

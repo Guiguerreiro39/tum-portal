@@ -58,23 +58,29 @@ export default {
     data() {
         return {
             picked: "",
+            options: [],
         };
+    },
+    created() {
+        this.options = this.vote.options.sort((a, b) => {
+            return b.users.length - a.users.length;
+        });
+
+        this.options.forEach((o) => {
+            const id = this.$store.getters.getID;
+            if (o.users.indexOf(id) !== -1) this.picked = o._id;
+        });
     },
     computed: {
         question: function() {
             return this.vote.question;
-        },
-        options: function() {
-            return this.vote.options.sort((a, b) => {
-                return b.users.length - a.users.length;
-            });
         },
         id: function() {
             return this.vote._id;
         },
         totalVotes: function() {
             var num = 0;
-            this.vote.options.forEach((o) => {
+            this.options.forEach((o) => {
                 num += o.users.length;
             });
 
